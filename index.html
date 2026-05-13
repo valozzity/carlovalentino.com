@@ -4,65 +4,264 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carlo Valentino</title>
+  <meta name="description" content="Art updates, available works, and upcoming shows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:    #787878;
-      --green: #2dc437;
-      --muted: #5a5a5a;
-      --dark:  #1e1e1e;
-      --border:#606060;
+      --bg:      #787878;
+      --green:   #2dc437;
+      --fg:      #ebebeb;
+      --muted:   rgba(235,235,235,0.38);
+      --border:  rgba(235,235,235,0.18);
+      --dark:    #1a1a1a;
     }
 
-    html, body { height: 100%; }
+    html { height: 100%; }
 
     body {
-      background: var(--bg);
-      font-family: 'Nunito', sans-serif;
-      -webkit-font-smoothing: antialiased;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle, rgba(0,0,0,0.18) 1px, transparent 1px);
+      background-size: 22px 22px;
+      color: var(--fg);
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      padding: 28px 28px 36px;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
+    /* ── GRAIN ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: .055;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+    }
+    .cursor::before,
+    .cursor::after {
+      content: '';
+      position: absolute;
+      background: var(--green);
+    }
+    .cursor::before {
+      width: 1px;
+      height: 16px;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
+    .cursor::after {
+      width: 16px;
+      height: 1px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    /* ── REGISTRATION MARKS ── */
+    .reg {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .reg::before, .reg::after {
+      content: '';
+      position: absolute;
+      background: rgba(235,235,235,0.22);
+    }
+    .reg::before { width: 1px; height: 20px; left: 50%; }
+    .reg::after  { width: 20px; height: 1px; top: 50%; left: 0; }
+    .reg-tl { top: 20px; left: 20px; }
+    .reg-tr { top: 20px; right: 20px; }
+    .reg-bl { bottom: 20px; left: 20px; }
+    .reg-br { bottom: 20px; right: 20px; }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 36px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+
+    .logo-mark {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .3em;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+
+    .city-tags {
+      display: flex;
+      gap: 0;
+      align-items: center;
+    }
+
+    .city-tag {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: .22em;
+      color: var(--muted);
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-left: 1px solid var(--border);
+    }
+    .city-tag:first-child { border-left: none; }
+
+    /* ── MAIN ── */
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding-bottom: 28px;
+      padding: 0 36px 32px;
+    }
+
+    .edition-tag {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
+    }
+
+    .name-block {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
     }
 
     h1 {
-      font-weight: 800;
-      font-size: clamp(48px, 11.6vw, 999px);
-      line-height: 1;
-      letter-spacing: -.01em;
-      text-transform: lowercase;
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-size: clamp(72px, 13.5vw, 210px);
+      line-height: .92;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
       color: var(--green);
-      white-space: nowrap;
+      position: relative;
     }
 
-    .sub {
-      margin-top: 14px;
+    /* subtle text shadow depth */
+    h1 span {
+      display: block;
+      text-shadow:
+        3px 3px 0px rgba(0,0,0,0.12),
+        6px 6px 0px rgba(0,0,0,0.06);
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+      opacity: 0;
+      animation: scaleX 0.8s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    .desc-block {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.65s forwards;
+    }
+
+    .desc {
+      font-size: clamp(14px, 1.4vw, 18px);
       font-weight: 300;
-      font-size: clamp(11px, 1.1vw, 16px);
-      letter-spacing: .22em;
-      color: var(--muted);
-      line-height: 1.6;
+      letter-spacing: .2em;
+      color: var(--fg);
+      line-height: 1.8;
       text-transform: lowercase;
+      max-width: 480px;
     }
 
-    /* ── LOOPS FORM — override all inline styles ── */
+    .desc em {
+      font-style: normal;
+      color: var(--fg);
+    }
+
+    .cat-num {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+      opacity: .6;
+      flex-shrink: 0;
+    }
+
+    /* ── NEWSLETTER ── */
+    footer {
+      padding: 0 36px 36px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.8s forwards;
+    }
+
+    .form-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-label::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--green); }
+    }
+
+    /* Loops form container reset */
     .newsletter-form-container {
       width: 100%;
-      max-width: 480px;
     }
 
     .newsletter-form {
@@ -70,7 +269,14 @@
       flex-direction: row !important;
       align-items: stretch !important;
       width: 100% !important;
-      border: 1px solid var(--border);
+      max-width: 580px !important;
+      border: 1px solid var(--border) !important;
+      position: relative;
+      transition: border-color .2s;
+    }
+
+    .newsletter-form:focus-within {
+      border-color: var(--green) !important;
     }
 
     .newsletter-form-input {
@@ -80,34 +286,35 @@
       border-radius: 0 !important;
       box-shadow: none !important;
       outline: none;
-      padding: 12px 18px !important;
-      font-family: 'Nunito', sans-serif !important;
+      padding: 14px 20px !important;
+      font-family: 'JetBrains Mono', monospace !important;
       font-weight: 300 !important;
-      font-size: 14px !important;
-      color: #e0e0e0 !important;
+      font-size: 13px !important;
+      letter-spacing: .06em;
+      color: var(--fg) !important;
       width: auto !important;
       max-width: none !important;
       min-width: 0 !important;
       margin: 0 !important;
     }
 
-    .newsletter-form-input::placeholder { color: var(--border) !important; }
+    .newsletter-form-input::placeholder { color: var(--muted) !important; }
 
     .newsletter-form-button,
     .newsletter-loading-button {
-      font-family: 'Nunito', sans-serif !important;
-      font-weight: 800 !important;
-      font-size: 12px !important;
-      letter-spacing: .2em;
-      text-transform: lowercase;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 500 !important;
+      font-size: 11px !important;
+      letter-spacing: .28em;
+      text-transform: uppercase;
       background: transparent !important;
       color: var(--green) !important;
       border: none !important;
       border-left: 1px solid var(--border) !important;
       border-radius: 0 !important;
       box-shadow: none !important;
-      padding: 12px 20px !important;
-      cursor: pointer;
+      padding: 14px 24px !important;
+      cursor: none;
       white-space: nowrap;
       height: auto !important;
       width: auto !important;
@@ -122,159 +329,211 @@
 
     .newsletter-success,
     .newsletter-error {
-      margin-top: 10px;
+      margin-top: 12px;
       display: none;
-      align-items: center;
     }
 
     .newsletter-success-message {
-      font-family: 'Nunito', sans-serif !important;
+      font-family: 'JetBrains Mono', monospace !important;
       font-size: 11px !important;
-      letter-spacing: .18em;
+      letter-spacing: .22em;
       text-transform: lowercase;
       color: var(--green) !important;
     }
 
     .newsletter-error-message {
-      font-family: 'Nunito', sans-serif !important;
+      font-family: 'JetBrains Mono', monospace !important;
       font-size: 11px !important;
-      letter-spacing: .18em;
+      letter-spacing: .22em;
       text-transform: lowercase;
-      color: #d44 !important;
+      color: #e05555 !important;
     }
 
     .newsletter-back-button {
-      font-family: 'Nunito', sans-serif !important;
-      font-size: 11px !important;
-      letter-spacing: .15em;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 10px !important;
+      letter-spacing: .2em;
       text-transform: lowercase;
       color: var(--muted) !important;
       background: transparent !important;
       border: none !important;
-      cursor: pointer;
+      cursor: none;
       margin: 10px 0 0 !important;
       padding: 0 !important;
       display: none;
     }
 
     .newsletter-back-button:hover { text-decoration: underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleX {
+      from { opacity: 0; transform: scaleX(0); }
+      to   { opacity: 1; transform: scaleX(1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header, main, footer { padding-left: 20px; padding-right: 20px; }
+      .city-tags { display: none; }
+      .cat-num   { display: none; }
+      .desc-block { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
+<!-- Registration marks -->
+<div class="reg reg-tl"></div>
+<div class="reg reg-tr"></div>
+<div class="reg reg-bl"></div>
+<div class="reg reg-br"></div>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Header -->
+<header>
+  <div></div>
+  <div class="city-tags">
+    <span class="city-tag">Los Angeles</span>
+  </div>
+</header>
+
+<!-- Main -->
 <main>
-  <h1>carlo valentino</h1>
-  <p class="sub">
-    sign up for the newsletter. artwork releases, upcoming shows<br>
-    thoughts and such.
-  </p>
+  <div class="name-block">
+    <h1>
+      <span>carlo</span>
+      <span>valentino</span>
+    </h1>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="desc-block">
+    <p class="desc">
+      sign up for the newsletter.<br>
+      <em>artwork releases</em>, upcoming shows<br>
+      thoughts and such.
+    </p>
+    <div class="cat-num">
+      2026<br>
+      EST.
+    </div>
+  </div>
 </main>
 
-<div class="newsletter-form-container">
-  <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmikvu5m35hz5180ifhj0myon" method="POST">
-    <input class="newsletter-form-input" placeholder="you@example.com" required type="email" name="newsletter-form-input">
-    <button type="submit" class="newsletter-form-button">subscribe</button>
-    <button type="button" class="newsletter-loading-button" style="display:none">...</button>
-  </form>
-  <div class="newsletter-success" style="display:none">
-    <p class="newsletter-success-message">thanks for signing up, cool stuff incoming.</p>
+<!-- Newsletter -->
+<footer>
+  <div class="newsletter-form-container">
+    <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmikvu5m35hz5180ifhj0myon" method="POST">
+      <input class="newsletter-form-input" placeholder="you@example.com" required type="email" name="newsletter-form-input">
+      <button type="submit" class="newsletter-form-button">subscribe</button>
+      <button type="button" class="newsletter-loading-button" style="display:none">...</button>
+    </form>
+    <div class="newsletter-success" style="display:none">
+      <p class="newsletter-success-message">you're in — watch your inbox.</p>
+    </div>
+    <div class="newsletter-error" style="display:none">
+      <p class="newsletter-error-message">something went wrong — try again.</p>
+    </div>
+    <button class="newsletter-back-button" type="button" style="display:none">← back</button>
   </div>
-  <div class="newsletter-error" style="display:none">
-    <p class="newsletter-error-message">oops! something went wrong, please try again</p>
-  </div>
-  <button class="newsletter-back-button" type="button" style="display:none">← back</button>
-</div>
+</footer>
 
 <script>
-function submitHandler(event) {
-  event.preventDefault();
-  var container = event.target.parentNode;
-  var form = container.querySelector(".newsletter-form");
-  var formInput = container.querySelector(".newsletter-form-input");
-  var success = container.querySelector(".newsletter-success");
-  var errorContainer = container.querySelector(".newsletter-error");
-  var errorMessage = container.querySelector(".newsletter-error-message");
-  var backButton = container.querySelector(".newsletter-back-button");
-  var submitButton = container.querySelector(".newsletter-form-button");
-  var loadingButton = container.querySelector(".newsletter-loading-button");
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
 
-  const rateLimit = () => {
-    errorContainer.style.display = "flex";
-    errorMessage.innerText = "too many signups, please try again in a little while";
-    submitButton.style.display = "none";
-    formInput.style.display = "none";
-    backButton.style.display = "block";
-  };
+  // Loops form logic
+  function submitHandler(event) {
+    event.preventDefault();
+    var container = event.target.parentNode;
+    var form = container.querySelector(".newsletter-form");
+    var formInput = container.querySelector(".newsletter-form-input");
+    var success = container.querySelector(".newsletter-success");
+    var errorContainer = container.querySelector(".newsletter-error");
+    var errorMessage = container.querySelector(".newsletter-error-message");
+    var backButton = container.querySelector(".newsletter-back-button");
+    var submitButton = container.querySelector(".newsletter-form-button");
+    var loadingButton = container.querySelector(".newsletter-loading-button");
 
-  var time = new Date();
-  var timestamp = time.valueOf();
-  var previousTimestamp = localStorage.getItem("loops-form-timestamp");
-  if (previousTimestamp && Number(previousTimestamp) + 60000 > timestamp) {
-    rateLimit();
-    return;
-  }
-  localStorage.setItem("loops-form-timestamp", timestamp);
-
-  submitButton.style.display = "none";
-  loadingButton.style.display = "flex";
-
-  var formBody = "userGroup=&mailingLists=&email=" + encodeURIComponent(formInput.value);
-
-  fetch(event.target.action, {
-    method: "POST",
-    body: formBody,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  })
-    .then((res) => [res.ok, res.json(), res])
-    .then(([ok, dataPromise, res]) => {
-      if (ok) {
-        success.style.display = "flex";
-        form.reset();
-      } else {
-        dataPromise.then(data => {
-          errorContainer.style.display = "flex";
-          errorMessage.innerText = data.message ? data.message : res.statusText;
-        });
-      }
-    })
-    .catch(error => {
-      if (error.message === "Failed to fetch") { rateLimit(); return; }
+    const rateLimit = () => {
       errorContainer.style.display = "flex";
-      if (error.message) errorMessage.innerText = error.message;
-      localStorage.setItem("loops-form-timestamp", '');
-    })
-    .finally(() => {
+      errorMessage.innerText = "too many signups — try again shortly";
+      submitButton.style.display = "none";
       formInput.style.display = "none";
-      loadingButton.style.display = "none";
       backButton.style.display = "block";
-    });
-}
+    };
 
-function resetFormHandler(event) {
-  var container = event.target.parentNode;
-  var formInput = container.querySelector(".newsletter-form-input");
-  var success = container.querySelector(".newsletter-success");
-  var errorContainer = container.querySelector(".newsletter-error");
-  var errorMessage = container.querySelector(".newsletter-error-message");
-  var backButton = container.querySelector(".newsletter-back-button");
-  var submitButton = container.querySelector(".newsletter-form-button");
+    var time = new Date();
+    var timestamp = time.valueOf();
+    var previousTimestamp = localStorage.getItem("loops-form-timestamp");
+    if (previousTimestamp && Number(previousTimestamp) + 60000 > timestamp) {
+      rateLimit(); return;
+    }
+    localStorage.setItem("loops-form-timestamp", timestamp);
 
-  success.style.display = "none";
-  errorContainer.style.display = "none";
-  errorMessage.innerText = "oops! something went wrong, please try again";
-  backButton.style.display = "none";
-  formInput.style.display = "flex";
-  submitButton.style.display = "flex";
-}
+    submitButton.style.display = "none";
+    loadingButton.style.display = "flex";
 
-var formContainers = document.getElementsByClassName("newsletter-form-container");
-for (var i = 0; i < formContainers.length; i++) {
-  var formContainer = formContainers[i];
-  if (formContainer.classList.contains('newsletter-handlers-added')) continue;
-  formContainer.querySelector(".newsletter-form").addEventListener("submit", submitHandler);
-  formContainer.querySelector(".newsletter-back-button").addEventListener("click", resetFormHandler);
-  formContainer.classList.add("newsletter-handlers-added");
-}
+    fetch(event.target.action, {
+      method: "POST",
+      body: "userGroup=&mailingLists=&email=" + encodeURIComponent(formInput.value),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    })
+      .then(res => [res.ok, res.json(), res])
+      .then(([ok, dataPromise, res]) => {
+        if (ok) {
+          success.style.display = "flex";
+          form.reset();
+        } else {
+          dataPromise.then(data => {
+            errorContainer.style.display = "flex";
+            errorMessage.innerText = data.message ? data.message : res.statusText;
+          });
+        }
+      })
+      .catch(error => {
+        if (error.message === "Failed to fetch") { rateLimit(); return; }
+        errorContainer.style.display = "flex";
+        if (error.message) errorMessage.innerText = error.message;
+        localStorage.setItem("loops-form-timestamp", '');
+      })
+      .finally(() => {
+        formInput.style.display = "none";
+        loadingButton.style.display = "none";
+        backButton.style.display = "block";
+      });
+  }
+
+  function resetFormHandler(event) {
+    var container = event.target.parentNode;
+    container.querySelector(".newsletter-success").style.display = "none";
+    container.querySelector(".newsletter-error").style.display = "none";
+    container.querySelector(".newsletter-error-message").innerText = "something went wrong — try again.";
+    container.querySelector(".newsletter-back-button").style.display = "none";
+    container.querySelector(".newsletter-form-input").style.display = "flex";
+    container.querySelector(".newsletter-form-button").style.display = "flex";
+  }
+
+  var formContainers = document.getElementsByClassName("newsletter-form-container");
+  for (var i = 0; i < formContainers.length; i++) {
+    var fc = formContainers[i];
+    if (fc.classList.contains('newsletter-handlers-added')) continue;
+    fc.querySelector(".newsletter-form").addEventListener("submit", submitHandler);
+    fc.querySelector(".newsletter-back-button").addEventListener("click", resetFormHandler);
+    fc.classList.add("newsletter-handlers-added");
+  }
 </script>
 
 </body>
