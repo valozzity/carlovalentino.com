@@ -279,6 +279,19 @@
       border-color: var(--green) !important;
     }
 
+    @keyframes newsletter-bounce {
+      0%   { transform: translateY(0); }
+      30%  { transform: translateY(-7px); }
+      55%  { transform: translateY(-2px); }
+      75%  { transform: translateY(-5px); }
+      90%  { transform: translateY(-1px); }
+      100% { transform: translateY(0); }
+    }
+
+    .newsletter-form.is-bouncing {
+      animation: newsletter-bounce 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
     .newsletter-form-input {
       flex: 1 !important;
       background: transparent !important;
@@ -534,6 +547,18 @@
     fc.querySelector(".newsletter-back-button").addEventListener("click", resetFormHandler);
     fc.classList.add("newsletter-handlers-added");
   }
+
+  // Bounce the form on input focus
+  var nlInput = document.querySelector('.newsletter-form-input');
+  var nlForm  = document.querySelector('.newsletter-form');
+  nlInput.addEventListener('focus', function() {
+    nlForm.classList.remove('is-bouncing');
+    nlForm.offsetWidth; // force reflow so animation restarts each focus
+    nlForm.classList.add('is-bouncing');
+  });
+  nlForm.addEventListener('animationend', function() {
+    nlForm.classList.remove('is-bouncing');
+  });
 </script>
 
 </body>
