@@ -4,229 +4,277 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carlo Valentino</title>
-  <meta name="description" content="Art updates, available works, and upcoming shows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:      #0e0e0e;
-      --fg:      #e8e4de;
-      --muted:   #7a7269;
-      --border:  #2a2620;
-      --accent:  #c8b89a;
+      --bg:    #787878;
+      --green: #2dc437;
+      --muted: #5a5a5a;
+      --dark:  #1e1e1e;
+      --border:#606060;
     }
 
-    html, body {
-      height: 100%;
-    }
+    html, body { height: 100%; }
 
     body {
       background: var(--bg);
-      color: var(--fg);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 24px;
+      font-family: 'Nunito', sans-serif;
       -webkit-font-smoothing: antialiased;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 520px;
       display: flex;
       flex-direction: column;
-      gap: 0;
+      min-height: 100vh;
+      padding: 28px 28px 36px;
     }
 
-    /* Name */
-    .name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(42px, 8vw, 64px);
-      letter-spacing: .12em;
-      line-height: 1;
-      color: var(--fg);
-      margin-bottom: 28px;
-    }
-
-    /* Divider */
-    .rule {
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-      margin-bottom: 28px;
-      opacity: .6;
-    }
-
-    /* Description */
-    .desc {
-      font-size: 12px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      line-height: 2;
-      margin-bottom: 52px;
-    }
-
-    /* Form */
-    .form-label {
-      font-size: 10px;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-    }
-
-    .form-row input[type="email"] {
+    main {
       flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 14px 18px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      letter-spacing: .05em;
-      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 28px;
     }
 
-    .form-row input[type="email"]::placeholder {
-      color: var(--muted);
-    }
-
-    .form-row button {
-      background: transparent;
-      border: none;
-      border-left: 1px solid var(--border);
-      padding: 14px 22px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: var(--accent);
-      cursor: pointer;
-      transition: background .2s, color .2s;
+    h1 {
+      font-weight: 800;
+      font-size: clamp(48px, 11.6vw, 999px);
+      line-height: 1;
+      letter-spacing: -.01em;
+      text-transform: lowercase;
+      color: var(--green);
       white-space: nowrap;
     }
 
-    .form-row button:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    /* Success / error state */
-    .form-feedback {
+    .sub {
       margin-top: 14px;
-      font-size: 11px;
-      letter-spacing: .15em;
+      font-weight: 300;
+      font-size: clamp(11px, 1.1vw, 16px);
+      letter-spacing: .22em;
       color: var(--muted);
-      min-height: 18px;
+      line-height: 1.6;
+      text-transform: lowercase;
     }
-    .form-feedback.ok  { color: #a8c4a2; }
-    .form-feedback.err { color: #c4a2a2; }
 
-    /* Footer */
-    .footer {
-      margin-top: 80px;
-      font-size: 10px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--border);
+    /* ── LOOPS FORM — override all inline styles ── */
+    .newsletter-form-container {
+      width: 100%;
+      max-width: 480px;
     }
+
+    .newsletter-form {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: stretch !important;
+      width: 100% !important;
+      border: 1px solid var(--border);
+    }
+
+    .newsletter-form-input {
+      flex: 1 !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      outline: none;
+      padding: 12px 18px !important;
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 300 !important;
+      font-size: 14px !important;
+      color: #e0e0e0 !important;
+      width: auto !important;
+      max-width: none !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+    }
+
+    .newsletter-form-input::placeholder { color: var(--border) !important; }
+
+    .newsletter-form-button,
+    .newsletter-loading-button {
+      font-family: 'Nunito', sans-serif !important;
+      font-weight: 800 !important;
+      font-size: 12px !important;
+      letter-spacing: .2em;
+      text-transform: lowercase;
+      background: transparent !important;
+      color: var(--green) !important;
+      border: none !important;
+      border-left: 1px solid var(--border) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 12px 20px !important;
+      cursor: pointer;
+      white-space: nowrap;
+      height: auto !important;
+      width: auto !important;
+      max-width: none !important;
+      transition: background .15s, color .15s;
+    }
+
+    .newsletter-form-button:hover {
+      background: var(--green) !important;
+      color: var(--dark) !important;
+    }
+
+    .newsletter-success,
+    .newsletter-error {
+      margin-top: 10px;
+      display: none;
+      align-items: center;
+    }
+
+    .newsletter-success-message {
+      font-family: 'Nunito', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: .18em;
+      text-transform: lowercase;
+      color: var(--green) !important;
+    }
+
+    .newsletter-error-message {
+      font-family: 'Nunito', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: .18em;
+      text-transform: lowercase;
+      color: #d44 !important;
+    }
+
+    .newsletter-back-button {
+      font-family: 'Nunito', sans-serif !important;
+      font-size: 11px !important;
+      letter-spacing: .15em;
+      text-transform: lowercase;
+      color: var(--muted) !important;
+      background: transparent !important;
+      border: none !important;
+      cursor: pointer;
+      margin: 10px 0 0 !important;
+      padding: 0 !important;
+      display: none;
+    }
+
+    .newsletter-back-button:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<div class="wrap">
-  <h1 class="name">Carlo<br>Valentino</h1>
-  <div class="rule"></div>
-  <p class="desc">
-    Art updates<br>
-    Available works<br>
-    Upcoming shows
+<main>
+  <h1>carlo valentino</h1>
+  <p class="sub">
+    sign up for the newsletter. artwork releases, upcoming shows<br>
+    thoughts and such.
   </p>
+</main>
 
-  <!--
-    LOOPS SETUP:
-    1. Go to app.loops.so → Forms → Create Form
-    2. Copy your Form ID from the embed code (looks like: abc123xyz)
-    3. Replace YOUR_LOOPS_FORM_ID below with that ID
-  -->
-  <form
-    id="signup-form"
-    action="https://app.loops.so/api/newsletter-form/YOUR_LOOPS_FORM_ID"
-    method="post"
-  >
-    <label class="form-label" for="email">Join the list</label>
-    <div class="form-row">
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="your@email.com"
-        required
-        autocomplete="email"
-      >
-      <button type="submit">Subscribe</button>
-    </div>
-    <p class="form-feedback" id="feedback"></p>
+<div class="newsletter-form-container">
+  <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmikvu5m35hz5180ifhj0myon" method="POST">
+    <input class="newsletter-form-input" placeholder="you@example.com" required type="email" name="newsletter-form-input">
+    <button type="submit" class="newsletter-form-button">subscribe</button>
+    <button type="button" class="newsletter-loading-button" style="display:none">...</button>
   </form>
+  <div class="newsletter-success" style="display:none">
+    <p class="newsletter-success-message">thanks for signing up, cool stuff incoming.</p>
+  </div>
+  <div class="newsletter-error" style="display:none">
+    <p class="newsletter-error-message">oops! something went wrong, please try again</p>
+  </div>
+  <button class="newsletter-back-button" type="button" style="display:none">← back</button>
 </div>
 
-<div class="footer">© Carlo Valentino</div>
-
 <script>
-  const form     = document.getElementById('signup-form');
-  const feedback = document.getElementById('feedback');
+function submitHandler(event) {
+  event.preventDefault();
+  var container = event.target.parentNode;
+  var form = container.querySelector(".newsletter-form");
+  var formInput = container.querySelector(".newsletter-form-input");
+  var success = container.querySelector(".newsletter-success");
+  var errorContainer = container.querySelector(".newsletter-error");
+  var errorMessage = container.querySelector(".newsletter-error-message");
+  var backButton = container.querySelector(".newsletter-back-button");
+  var submitButton = container.querySelector(".newsletter-form-button");
+  var loadingButton = container.querySelector(".newsletter-loading-button");
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = form.email.value.trim();
-    const btn   = form.querySelector('button');
+  const rateLimit = () => {
+    errorContainer.style.display = "flex";
+    errorMessage.innerText = "too many signups, please try again in a little while";
+    submitButton.style.display = "none";
+    formInput.style.display = "none";
+    backButton.style.display = "block";
+  };
 
-    btn.textContent = '...';
-    btn.disabled    = true;
-    feedback.className = 'form-feedback';
-    feedback.textContent = '';
+  var time = new Date();
+  var timestamp = time.valueOf();
+  var previousTimestamp = localStorage.getItem("loops-form-timestamp");
+  if (previousTimestamp && Number(previousTimestamp) + 60000 > timestamp) {
+    rateLimit();
+    return;
+  }
+  localStorage.setItem("loops-form-timestamp", timestamp);
 
-    try {
-      const res = await fetch(form.action, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body:    `email=${encodeURIComponent(email)}`,
-      });
+  submitButton.style.display = "none";
+  loadingButton.style.display = "flex";
 
-      if (res.ok) {
-        feedback.className   = 'form-feedback ok';
-        feedback.textContent = 'You\'re in.';
+  var formBody = "userGroup=&mailingLists=&email=" + encodeURIComponent(formInput.value);
+
+  fetch(event.target.action, {
+    method: "POST",
+    body: formBody,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  })
+    .then((res) => [res.ok, res.json(), res])
+    .then(([ok, dataPromise, res]) => {
+      if (ok) {
+        success.style.display = "flex";
         form.reset();
       } else {
-        throw new Error();
+        dataPromise.then(data => {
+          errorContainer.style.display = "flex";
+          errorMessage.innerText = data.message ? data.message : res.statusText;
+        });
       }
-    } catch {
-      feedback.className   = 'form-feedback err';
-      feedback.textContent = 'Something went wrong — try again.';
-    } finally {
-      btn.textContent = 'Subscribe';
-      btn.disabled    = false;
-    }
-  });
+    })
+    .catch(error => {
+      if (error.message === "Failed to fetch") { rateLimit(); return; }
+      errorContainer.style.display = "flex";
+      if (error.message) errorMessage.innerText = error.message;
+      localStorage.setItem("loops-form-timestamp", '');
+    })
+    .finally(() => {
+      formInput.style.display = "none";
+      loadingButton.style.display = "none";
+      backButton.style.display = "block";
+    });
+}
+
+function resetFormHandler(event) {
+  var container = event.target.parentNode;
+  var formInput = container.querySelector(".newsletter-form-input");
+  var success = container.querySelector(".newsletter-success");
+  var errorContainer = container.querySelector(".newsletter-error");
+  var errorMessage = container.querySelector(".newsletter-error-message");
+  var backButton = container.querySelector(".newsletter-back-button");
+  var submitButton = container.querySelector(".newsletter-form-button");
+
+  success.style.display = "none";
+  errorContainer.style.display = "none";
+  errorMessage.innerText = "oops! something went wrong, please try again";
+  backButton.style.display = "none";
+  formInput.style.display = "flex";
+  submitButton.style.display = "flex";
+}
+
+var formContainers = document.getElementsByClassName("newsletter-form-container");
+for (var i = 0; i < formContainers.length; i++) {
+  var formContainer = formContainers[i];
+  if (formContainer.classList.contains('newsletter-handlers-added')) continue;
+  formContainer.querySelector(".newsletter-form").addEventListener("submit", submitHandler);
+  formContainer.querySelector(".newsletter-back-button").addEventListener("click", resetFormHandler);
+  formContainer.classList.add("newsletter-handlers-added");
+}
 </script>
 
 </body>
