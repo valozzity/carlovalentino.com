@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carlo Valentino</title>
+  <meta name="description" content="Art updates, available works, and upcoming shows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0e0e0e;
+      --fg:      #e8e4de;
+      --muted:   #7a7269;
+      --border:  #2a2620;
+      --accent:  #c8b89a;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Name */
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(42px, 8vw, 64px);
+      letter-spacing: .12em;
+      line-height: 1;
+      color: var(--fg);
+      margin-bottom: 28px;
+    }
+
+    /* Divider */
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 28px;
+      opacity: .6;
+    }
+
+    /* Description */
+    .desc {
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 52px;
+    }
+
+    /* Form */
+    .form-label {
+      font-size: 10px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .form-row input[type="email"] {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: .05em;
+      color: var(--fg);
+    }
+
+    .form-row input[type="email"]::placeholder {
+      color: var(--muted);
+    }
+
+    .form-row button {
+      background: transparent;
+      border: none;
+      border-left: 1px solid var(--border);
+      padding: 14px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+
+    .form-row button:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Success / error state */
+    .form-feedback {
+      margin-top: 14px;
+      font-size: 11px;
+      letter-spacing: .15em;
+      color: var(--muted);
+      min-height: 18px;
+    }
+    .form-feedback.ok  { color: #a8c4a2; }
+    .form-feedback.err { color: #c4a2a2; }
+
+    /* Footer */
+    .footer {
+      margin-top: 80px;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1 class="name">Carlo<br>Valentino</h1>
+  <div class="rule"></div>
+  <p class="desc">
+    Art updates<br>
+    Available works<br>
+    Upcoming shows
+  </p>
+
+  <!--
+    LOOPS SETUP:
+    1. Go to app.loops.so → Forms → Create Form
+    2. Copy your Form ID from the embed code (looks like: abc123xyz)
+    3. Replace YOUR_LOOPS_FORM_ID below with that ID
+  -->
+  <form
+    id="signup-form"
+    action="https://app.loops.so/api/newsletter-form/YOUR_LOOPS_FORM_ID"
+    method="post"
+  >
+    <label class="form-label" for="email">Join the list</label>
+    <div class="form-row">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="your@email.com"
+        required
+        autocomplete="email"
+      >
+      <button type="submit">Subscribe</button>
+    </div>
+    <p class="form-feedback" id="feedback"></p>
+  </form>
+</div>
+
+<div class="footer">© Carlo Valentino</div>
+
+<script>
+  const form     = document.getElementById('signup-form');
+  const feedback = document.getElementById('feedback');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    const btn   = form.querySelector('button');
+
+    btn.textContent = '...';
+    btn.disabled    = true;
+    feedback.className = 'form-feedback';
+    feedback.textContent = '';
+
+    try {
+      const res = await fetch(form.action, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body:    `email=${encodeURIComponent(email)}`,
+      });
+
+      if (res.ok) {
+        feedback.className   = 'form-feedback ok';
+        feedback.textContent = 'You\'re in.';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      feedback.className   = 'form-feedback err';
+      feedback.textContent = 'Something went wrong — try again.';
+    } finally {
+      btn.textContent = 'Subscribe';
+      btn.disabled    = false;
+    }
+  });
+</script>
+
+</body>
+</html>
