@@ -25,7 +25,7 @@
 
     body {
       background-color: var(--bg);
-      background-image: url('bg-desktop.jpg');
+      background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.50) 100%), url('bg-desktop.jpg');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -41,7 +41,7 @@
 
     @media (max-width: 600px) {
       body {
-        background-image: url('bg-mobile.jpg');
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.50) 100%), url('bg-mobile.jpg');
         background-position: top center;
       }
     }
@@ -186,10 +186,22 @@
         6px 6px 0px rgba(0,0,0,0.06);
     }
 
+    .signup-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--fg);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
+    }
+
     .rule {
       width: 100%;
       height: 1px;
-      background: var(--border);
+      background: var(--green);
       margin: 28px 0;
       opacity: 0;
       animation: scaleX 0.8s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
@@ -212,7 +224,7 @@
       letter-spacing: .2em;
       color: var(--fg);
       line-height: 1.8;
-      text-transform: lowercase;
+      text-transform: uppercase;
       max-width: 480px;
     }
 
@@ -270,6 +282,7 @@
     /* Loops form container reset */
     .newsletter-form-container {
       width: 100%;
+      padding: 24px 0;
     }
 
     .newsletter-form {
@@ -278,13 +291,8 @@
       align-items: stretch !important;
       width: 100% !important;
       max-width: 580px !important;
-      border: 1px solid var(--border) !important;
+      border: 2px solid var(--green) !important;
       position: relative;
-      transition: border-color .2s;
-    }
-
-    .newsletter-form:focus-within {
-      border-color: var(--green) !important;
     }
 
     .newsletter-form-input {
@@ -318,7 +326,7 @@
       background: transparent !important;
       color: var(--green) !important;
       border: none !important;
-      border-left: 1px solid var(--border) !important;
+      border-left: 2px solid var(--green) !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       padding: 14px 24px !important;
@@ -423,21 +431,7 @@
 
   <div class="rule"></div>
 
-  <div class="desc-block">
-    <p class="desc">
-      sign up for the newsletter.<br>
-      <em>artwork releases</em>, upcoming shows<br>
-      thoughts and such.
-    </p>
-    <div class="cat-num">
-      2026<br>
-      EST.
-    </div>
-  </div>
-</main>
-
-<!-- Newsletter -->
-<footer>
+  <div class="signup-label">Sign Up For The Newsletter</div>
   <div class="newsletter-form-container">
     <form class="newsletter-form" action="https://app.loops.so/api/newsletter-form/cmikvu5m35hz5180ifhj0myon" method="POST">
       <input class="newsletter-form-input" placeholder="you@example.com" required type="email" name="newsletter-form-input">
@@ -452,7 +446,19 @@
     </div>
     <button class="newsletter-back-button" type="button" style="display:none">← back</button>
   </div>
-</footer>
+
+  <div class="desc-block">
+    <p class="desc">
+      Artwork Drops + Upcoming Shows
+    </p>
+    <div class="cat-num">
+      2026<br>
+      EST.
+    </div>
+  </div>
+</main>
+
+<footer></footer>
 
 <script>
   // Custom cursor
