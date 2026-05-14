@@ -408,8 +408,8 @@
       font-weight: 750;
       letter-spacing: .2em;
       text-transform: uppercase;
-      color: #000000;
-      background: var(--green);
+      color: var(--green);
+      background: transparent;
       border: 2px solid var(--green);
       padding: 14px 28px;
       text-decoration: none;
@@ -419,9 +419,9 @@
       cursor: none;
       transition: background .15s, color .15s;
     }
-    .play-btn:hover {
-      background: transparent;
-      color: var(--green);
+    .play-btn:hover, .play-btn:active {
+      background: var(--green);
+      color: #000000;
     }
 
     /* ── ANIMATIONS ── */
