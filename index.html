@@ -7,7 +7,7 @@
   <meta name="description" content="Art updates, available works, and upcoming shows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=JetBrains+Mono:wght@300;400;500;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,23 +25,44 @@
 
     body {
       background-color: var(--bg);
-      background-image: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.75) 100%), url('bg-desktop.jpg');
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
       color: var(--fg);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Barlow Condensed', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       cursor: none;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow: hidden;
+    }
+
+    .bg {
+      position: fixed;
+      inset: -10%;
+      width: 120%;
+      height: 120%;
+      background-image: url('bg-desktop.jpg');
+      background-size: cover;
+      background-position: center center;
+      z-index: -2;
+      animation: kenBurns 20s ease-in-out infinite alternate;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.75) 100%);
+      z-index: -1;
+    }
+
+    @keyframes kenBurns {
+      0%   { transform: scale(1)    translate(0, 0); }
+      50%  { transform: scale(1.06) translate(-1.5%, 1%); }
+      100% { transform: scale(1.04) translate(1%, -1%); }
     }
 
     @media (max-width: 600px) {
-      body {
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.75) 100%), url('bg-mobile.jpg');
+      .bg {
+        background-image: url('bg-mobile.jpg');
         background-position: top center;
       }
     }
@@ -58,34 +79,27 @@
     }
 
     /* ── CUSTOM CURSOR ── */
-    .cursor {
+    .cursor, .cursor-trail {
       position: fixed;
-      width: 16px;
-      height: 16px;
       pointer-events: none;
-      z-index: 9999;
       transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .cursor::before,
-    .cursor::after {
-      content: '';
-      position: absolute;
-      background: var(--green);
+    .cursor {
+      z-index: 9999;
+      width: 20px;
+      height: 20px;
+      transition: opacity .15s;
     }
-    .cursor::before {
-      width: 1px;
-      height: 16px;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
+    .cursor svg { width: 100%; height: 100%; }
+    .cursor-trail {
+      z-index: 9998;
+      width: 20px;
+      height: 20px;
     }
-    .cursor::after {
-      width: 16px;
-      height: 1px;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-    }
+    .cursor-trail svg { width: 100%; height: 100%; }
 
     /* ── REGISTRATION MARKS ── */
     .reg {
@@ -98,14 +112,19 @@
     .reg::before, .reg::after {
       content: '';
       position: absolute;
-      background: rgba(235,235,235,0.22);
+      background: var(--green);
     }
     .reg::before { width: 1px; height: 20px; left: 50%; }
     .reg::after  { width: 20px; height: 1px; top: 50%; left: 0; }
-    .reg-tl { top: 20px; left: 20px; }
-    .reg-tr { top: 20px; right: 20px; }
-    .reg-bl { bottom: 20px; left: 20px; }
-    .reg-br { bottom: 20px; right: 20px; }
+    .reg-tl { top: 20px; left: 20px;  animation: regPulse 4.8s ease-in-out infinite 0s; }
+    .reg-tr { top: 20px; right: 20px; animation: regPulse 4.8s ease-in-out infinite 0.6s; }
+    .reg-bl { bottom: 20px; left: 20px;  animation: regPulse 4.8s ease-in-out infinite 1.2s; }
+    .reg-br { bottom: 20px; right: 20px; animation: regPulse 4.8s ease-in-out infinite 1.8s; }
+
+    @keyframes regPulse {
+      0%, 100% { opacity: 1;  transform: scale(1); }
+      50%       { opacity: 0.25; transform: scale(0.7); }
+    }
 
     /* ── HEADER ── */
     header {
@@ -168,7 +187,7 @@
     }
 
     h1 {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
       font-size: clamp(72px, 13.5vw, 210px);
       line-height: .92;
@@ -187,13 +206,13 @@
     }
 
     .signup-label {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(14px, 1.4vw, 18px);
-      font-weight: 300;
+      font-weight: 750;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--fg);
-      margin-bottom: 12px;
+      margin-bottom: 0;
       opacity: 0;
       animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
     }
@@ -224,6 +243,8 @@
       letter-spacing: .2em;
       color: var(--fg);
       line-height: 1.8;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
       text-transform: uppercase;
       max-width: 480px;
     }
@@ -282,7 +303,7 @@
     /* Loops form container reset */
     .newsletter-form-container {
       width: 100%;
-      padding: 24px 0;
+      padding: 12px 0;
     }
 
     .newsletter-form {
@@ -303,7 +324,7 @@
       box-shadow: none !important;
       outline: none;
       padding: 14px 20px !important;
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
       font-weight: 300 !important;
       font-size: 13px !important;
       letter-spacing: .06em;
@@ -318,7 +339,7 @@
 
     .newsletter-form-button,
     .newsletter-loading-button {
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
       font-weight: 500 !important;
       font-size: 11px !important;
       letter-spacing: .28em;
@@ -350,7 +371,7 @@
     }
 
     .newsletter-success-message {
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
       font-size: 11px !important;
       letter-spacing: .22em;
       text-transform: lowercase;
@@ -358,7 +379,7 @@
     }
 
     .newsletter-error-message {
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
       font-size: 11px !important;
       letter-spacing: .22em;
       text-transform: lowercase;
@@ -366,7 +387,7 @@
     }
 
     .newsletter-back-button {
-      font-family: 'JetBrains Mono', monospace !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
       font-size: 10px !important;
       letter-spacing: .2em;
       text-transform: lowercase;
@@ -402,6 +423,9 @@
   </style>
 </head>
 <body>
+
+<div class="bg"></div>
+<div class="bg-overlay"></div>
 
 <!-- Registration marks -->
 <div class="reg reg-tl"></div>
@@ -461,12 +485,92 @@
 <footer></footer>
 
 <script>
-  // Custom cursor
+  // Cursor emblems
+  const EMBLEMS = [
+    // Crosshair
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="0" x2="10" y2="20" stroke="#2dc437" stroke-width="1"/>
+      <line x1="0" y1="10" x2="20" y2="10" stroke="#2dc437" stroke-width="1"/>
+    </svg>`,
+    // Circle
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="8" stroke="#2dc437" stroke-width="1"/>
+      <circle cx="10" cy="10" r="1.5" fill="#2dc437"/>
+    </svg>`,
+    // Diamond
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="10,1 19,10 10,19 1,10" stroke="#2dc437" stroke-width="1"/>
+    </svg>`,
+    // X
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="2" y1="2" x2="18" y2="18" stroke="#2dc437" stroke-width="1"/>
+      <line x1="18" y1="2" x2="2" y2="18" stroke="#2dc437" stroke-width="1"/>
+    </svg>`,
+    // Asterisk
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="10" y1="1" x2="10" y2="19" stroke="#2dc437" stroke-width="1"/>
+      <line x1="1" y1="10" x2="19" y2="10" stroke="#2dc437" stroke-width="1"/>
+      <line x1="3" y1="3" x2="17" y2="17" stroke="#2dc437" stroke-width="1"/>
+      <line x1="17" y1="3" x2="3" y2="17" stroke="#2dc437" stroke-width="1"/>
+    </svg>`,
+    // Target
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="8" stroke="#2dc437" stroke-width="1"/>
+      <circle cx="10" cy="10" r="4" stroke="#2dc437" stroke-width="1"/>
+      <circle cx="10" cy="10" r="1.5" fill="#2dc437"/>
+    </svg>`,
+  ];
+
+  let emblemIndex = 0;
   const cursor = document.getElementById('cursor');
+  cursor.innerHTML = EMBLEMS[0];
+
+  function cycleCursor() {
+    cursor.style.opacity = '0';
+    setTimeout(() => {
+      emblemIndex = (emblemIndex + 1) % EMBLEMS.length;
+      cursor.innerHTML = EMBLEMS[emblemIndex];
+      // sync trail SVG
+      trails.forEach(t => t.innerHTML = EMBLEMS[emblemIndex]);
+      cursor.style.opacity = '1';
+    }, 150);
+  }
+  setInterval(cycleCursor, 2000);
+
+  // Trail
+  const TRAIL_COUNT = 10;
+  const trails = [];
+  const history = Array(TRAIL_COUNT).fill({ x: -100, y: -100 });
+  let mouseX = -100, mouseY = -100;
+
+  for (let i = 0; i < TRAIL_COUNT; i++) {
+    const t = document.createElement('div');
+    t.className = 'cursor-trail';
+    t.innerHTML = EMBLEMS[0];
+    document.body.appendChild(t);
+    trails.push(t);
+  }
+
   document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
   });
+
+  (function animateTrail() {
+    history.unshift({ x: mouseX, y: mouseY });
+    history.pop();
+    trails.forEach((t, i) => {
+      const p = history[i];
+      const ratio = (TRAIL_COUNT - i) / TRAIL_COUNT;
+      t.style.left      = p.x + 'px';
+      t.style.top       = p.y + 'px';
+      t.style.opacity   = ratio * 0.45;
+      t.style.transform = `translate(-50%,-50%) scale(${ratio})`;
+    });
+    requestAnimationFrame(animateTrail);
+  })();
 
   // Loops form logic
   function submitHandler(event) {
