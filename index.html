@@ -373,9 +373,10 @@
 
     .newsletter-success-message {
       font-family: 'Barlow Condensed', sans-serif !important;
-      font-size: 11px !important;
-      letter-spacing: .22em;
-      text-transform: lowercase;
+      font-size: clamp(14px, 1.4vw, 18px) !important;
+      font-weight: 750 !important;
+      letter-spacing: .2em !important;
+      text-transform: uppercase !important;
       color: var(--green) !important;
     }
 
@@ -388,17 +389,7 @@
     }
 
     .newsletter-back-button {
-      font-family: 'Barlow Condensed', sans-serif !important;
-      font-size: 10px !important;
-      letter-spacing: .2em;
-      text-transform: lowercase;
-      color: var(--muted) !important;
-      background: transparent !important;
-      border: none !important;
-      cursor: none;
-      margin: 10px 0 0 !important;
-      padding: 0 !important;
-      display: none;
+      display: none !important;
     }
 
     .newsletter-back-button:hover { text-decoration: underline; }
@@ -464,7 +455,7 @@
       <button type="button" class="newsletter-loading-button" style="display:none">...</button>
     </form>
     <div class="newsletter-success" style="display:none">
-      <p class="newsletter-success-message">you're in — watch your inbox.</p>
+      <p class="newsletter-success-message">you're in.</p>
     </div>
     <div class="newsletter-error" style="display:none">
       <p class="newsletter-error-message">something went wrong — try again.</p>
