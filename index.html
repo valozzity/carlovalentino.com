@@ -25,7 +25,7 @@
 
     body {
       background-color: var(--bg);
-      background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.50) 100%), url('bg-desktop.jpg');
+      background-image: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.75) 100%), url('bg-desktop.jpg');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -41,7 +41,7 @@
 
     @media (max-width: 600px) {
       body {
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.50) 100%), url('bg-mobile.jpg');
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.75) 100%), url('bg-mobile.jpg');
         background-position: top center;
       }
     }
@@ -188,9 +188,9 @@
 
     .signup-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: .3em;
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 300;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--fg);
       margin-bottom: 12px;
@@ -314,7 +314,7 @@
       margin: 0 !important;
     }
 
-    .newsletter-form-input::placeholder { color: var(--muted) !important; }
+    .newsletter-form-input::placeholder { color: #ffffff !important; }
 
     .newsletter-form-button,
     .newsletter-loading-button {
