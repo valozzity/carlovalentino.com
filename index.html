@@ -25,9 +25,10 @@
 
     body {
       background-color: var(--bg);
-      background-image:
-        radial-gradient(circle, rgba(0,0,0,0.18) 1px, transparent 1px);
-      background-size: 22px 22px;
+      background-image: url('bg-desktop.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
       color: var(--fg);
       font-family: 'JetBrains Mono', monospace;
       min-height: 100vh;
@@ -36,6 +37,13 @@
       cursor: none;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        background-image: url('bg-mobile.jpg');
+        background-position: top center;
+      }
     }
 
     /* ── GRAIN ── */
