@@ -5,7 +5,8 @@
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-12.webp"
+    "shop-images/frame-12.webp",
+    "shop-images/three's-a-party-secondary.webp"
   ],
   "stripe_link": ""
 }
