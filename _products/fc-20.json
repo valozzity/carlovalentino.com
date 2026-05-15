@@ -5,7 +5,9 @@
   "description": "24\"x18\" spraypaint and airbrush on newsprint. 2026. Wheatpasted.",
   "status": "wheatpasted",
   "images": [
-    "shop-images/frame-20.webp"
+    "shop-images/frame-20.webp",
+    "shop-images/furious-secondary.webp",
+    "shop-images/furious-secondary-1.webp"
   ],
   "stripe_link": ""
 }
