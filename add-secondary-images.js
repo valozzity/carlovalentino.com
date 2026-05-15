@@ -7,11 +7,22 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const inputDir = process.argv.slice(2).join(' ');
-if (!inputDir) {
-  console.error('Usage: node add-secondary-images.js <folder>');
+const input = process.argv.slice(2).join(' ');
+if (!input) {
+  console.error('Usage: node add-secondary-images.js <folder-or-image>');
   process.exit(1);
 }
+
+// Resolve to {dir, file} pairs — works for folder or single file drops
+const inputStat = fs.statSync(input);
+const pairs = inputStat.isDirectory()
+  ? fs.readdirSync(input)
+      .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f))
+      .sort()
+      .map(f => ({ dir: input, file: f }))
+  : /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(path.basename(input))
+      ? [{ dir: path.dirname(input), file: path.basename(input) }]
+      : [];
 
 const productsDir = path.join(__dirname, '_products');
 const shopImagesDir = path.join(__dirname, 'shop-images');
@@ -40,13 +51,14 @@ function uniqueOutFile(slug) {
   return candidate;
 }
 
-const images = fs.readdirSync(inputDir)
-  .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f))
-  .sort();
+if (pairs.length === 0) {
+  console.log('No supported images found.');
+  process.exit(0);
+}
 
 let matched = 0, skipped = 0;
 
-for (const img of images) {
+for (const { dir: imgDir, file: img } of pairs) {
   const nameNoExt = path.basename(img, path.extname(img)).trim();
   const titleKey = baseTitle(nameNoExt);
 
@@ -63,7 +75,7 @@ for (const img of images) {
   const slug = titleKey.replace(/\s+/g, '-');
   const outFile = uniqueOutFile(slug);
   const outPath = path.join(shopImagesDir, outFile);
-  const srcPath = path.join(inputDir, img);
+  const srcPath = path.join(imgDir, img);
 
   execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 

@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-// Usage: node add-products.js <folder-of-images>
+// Usage: node add-products.js <folder-or-image>
 // Image filename = artwork title, e.g. "Martini Time.png"
-// Converts to webp, assigns next fc-N id, creates product JSON.
+// Accepts a folder of images or individual image files dropped via the droplet.
 
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const inputDir = process.argv.slice(2).join(' ');
-if (!inputDir) {
-  console.error('Usage: node add-products.js <folder>');
+const input = process.argv.slice(2).join(' ');
+if (!input) {
+  console.error('Usage: node add-products.js <folder-or-image>');
   process.exit(1);
 }
 
@@ -23,28 +23,33 @@ const existing = fs.readdirSync(productsDir)
   .filter(n => !isNaN(n));
 let nextN = existing.length > 0 ? Math.max(...existing) + 1 : 1;
 
-const images = fs.readdirSync(inputDir)
-  .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f))
-  .sort();
+// Resolve list of {dir, file} pairs — works for both folder and single file drops
+const stat = fs.statSync(input);
+const pairs = stat.isDirectory()
+  ? fs.readdirSync(input)
+      .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f))
+      .sort()
+      .map(f => ({ dir: input, file: f }))
+  : /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(path.basename(input))
+      ? [{ dir: path.dirname(input), file: path.basename(input) }]
+      : [];
 
-if (images.length === 0) {
-  console.log('No images found in folder.');
+if (pairs.length === 0) {
+  console.log('No supported images found.');
   process.exit(0);
 }
 
 let added = 0;
 
-for (const img of images) {
-  const title = path.basename(img, path.extname(img)).trim();
+for (const { dir, file } of pairs) {
+  const title = path.basename(file, path.extname(file)).trim();
   const id = `fc-${nextN}`;
   const imgFile = `frame-${nextN}.webp`;
-  const imgPath = path.join(shopImagesDir, imgFile);
-  const srcPath = path.join(inputDir, img);
+  const srcPath = path.join(dir, file);
+  const outPath = path.join(shopImagesDir, imgFile);
 
-  // Convert to webp
-  execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${imgPath}"`);
+  execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 
-  // Create product JSON
   const product = {
     id,
     title,
@@ -54,12 +59,9 @@ for (const img of images) {
     images: [`shop-images/${imgFile}`],
     stripe_link: '',
   };
-  fs.writeFileSync(
-    path.join(productsDir, `${id}.json`),
-    JSON.stringify(product, null, 2)
-  );
+  fs.writeFileSync(path.join(productsDir, `${id}.json`), JSON.stringify(product, null, 2));
 
-  console.log(`✓ "${img}" → ${id} — "${title}"`);
+  console.log(`✓ "${file}" → ${id} — "${title}"`);
   nextN++;
   added++;
 }
