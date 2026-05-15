@@ -2,6 +2,14 @@
   command = "node build.js"
   publish = "."
 
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]
