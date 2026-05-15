@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const inputDir = process.argv[2];
+const inputDir = process.argv.slice(2).join(' ');
 if (!inputDir) {
   console.error('Usage: node add-secondary-images.js <folder>');
   process.exit(1);
