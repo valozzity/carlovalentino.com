@@ -1,9 +1,9 @@
 {
   "id": "fc-20",
-  "title": "",
-  "price": null,
+  "title": "Furious",
+  "price": 100,
   "description": "",
-  "status": "available",
+  "status": "wheatpasted",
   "images": [
     "shop-images/frame-20.webp"
   ],
