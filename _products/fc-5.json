@@ -5,7 +5,8 @@
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-5.webp"
+    "shop-images/frame-5.webp",
+    "shop-images/lance-secondary.webp"
   ],
   "stripe_link": ""
 }

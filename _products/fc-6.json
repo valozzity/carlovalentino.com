@@ -5,7 +5,8 @@
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-6.webp"
+    "shop-images/frame-6.webp",
+    "shop-images/kirby-secondary.webp"
   ],
   "stripe_link": ""
 }
