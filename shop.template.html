@@ -412,9 +412,9 @@
   const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
   const COLS  = isMobile ? 2 : 3;
-  const BASE_W = isMobile ? Math.min(window.innerWidth * 0.30, 140) : Math.min(window.innerWidth * 0.22, 360);
-  const ROW_H  = isMobile ? 180 : 420;
-  const MAX_H  = isMobile ? 130 : 340;
+  const BASE_W = isMobile ? Math.min(window.innerWidth * 0.24, 100) : Math.min(window.innerWidth * 0.22, 360);
+  const ROW_H  = isMobile ? 200 : 420;
+  const MAX_H  = isMobile ? 110 : 340;
 
   // Scroll-reveal via IntersectionObserver
   const revealObserver = new IntersectionObserver((entries) => {
@@ -452,20 +452,20 @@
       const row = Math.floor(idx / COLS);
       const col = idx % COLS;
 
-      // Per-image random scale for size variety (tighter range on mobile)
-      const scale = isMobile ? 0.82 + Math.random() * 0.32 : 0.72 + Math.random() * 0.65;
+      // Per-image random scale (very tight on mobile to keep sizes consistent)
+      const scale = isMobile ? 0.88 + Math.random() * 0.20 : 0.72 + Math.random() * 0.65;
       const defaultW = BASE_W * scale;
 
-      // Loose random placement within column slot
-      const maxLeft = colW - defaultW - 12;
-      const left = col * colW + Math.max(12, Math.random() * Math.max(maxLeft, 40));
+      // Placement within column slot
+      const maxLeft = colW - defaultW - 10;
+      const left = col * colW + Math.max(10, Math.random() * Math.max(maxLeft, 20));
 
-      // Less vertical jitter on mobile to reduce overlap
-      const jitterFactor = isMobile ? 0.20 : 0.55;
+      // Minimal vertical jitter on mobile — rows stay cleanly separated
+      const jitterFactor = isMobile ? 0.06 : 0.55;
       const top = row * ROW_H + Math.random() * (ROW_H * jitterFactor) + 60;
 
-      // Rotation (subtler on mobile)
-      const rot = isMobile ? (Math.random() - 0.5) * 5 : (Math.random() - 0.5) * 10;
+      // Subtle rotation on mobile
+      const rot = isMobile ? (Math.random() - 0.5) * 4 : (Math.random() - 0.5) * 10;
 
       const el = document.createElement('div');
       el.className = 'product';
