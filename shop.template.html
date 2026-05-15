@@ -428,8 +428,8 @@
 
   const COLS  = isMobile ? 2 : 3;
   const BASE_W = isMobile ? Math.min(window.innerWidth * 0.38, 160) : Math.min(window.innerWidth * 0.22, 360);
-  const ROW_H  = isMobile ? 260 : 420;
-  const MAX_H  = isMobile ? 170 : 340;
+  const ROW_H  = isMobile ? 320 : 420;
+  const MAX_H  = isMobile ? 160 : 340;
 
   // Scroll-reveal via IntersectionObserver
   const revealObserver = new IntersectionObserver((entries) => {
@@ -475,12 +475,12 @@
       const maxLeft = colW - defaultW - 10;
       const left = col * colW + Math.max(10, Math.random() * Math.max(maxLeft, 20));
 
-      // Overlap reduced 25% on both
-      const jitterFactor = isMobile ? 0.045 : 0.41;
+      // Zero vertical jitter on mobile, moderate on desktop
+      const jitterFactor = isMobile ? 0 : 0.41;
       const top = row * ROW_H + Math.random() * (ROW_H * jitterFactor) + 60;
 
-      // Subtle rotation on mobile
-      const rot = isMobile ? (Math.random() - 0.5) * 4 : (Math.random() - 0.5) * 10;
+      // Zero rotation on mobile to prevent bounding box bleed
+      const rot = isMobile ? 0 : (Math.random() - 0.5) * 10;
 
       const el = document.createElement('div');
       el.className = 'product';
