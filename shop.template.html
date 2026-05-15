@@ -452,16 +452,16 @@
       const row = Math.floor(idx / COLS);
       const col = idx % COLS;
 
-      // Per-image random scale (very tight on mobile to keep sizes consistent)
-      const scale = isMobile ? 0.88 + Math.random() * 0.20 : 0.72 + Math.random() * 0.65;
+      // Scale: mobile tight, desktop min+15% / max-25%
+      const scale = isMobile ? 0.90 + Math.random() * 0.08 : 0.83 + Math.random() * 0.20;
       const defaultW = BASE_W * scale;
 
       // Placement within column slot
       const maxLeft = colW - defaultW - 10;
       const left = col * colW + Math.max(10, Math.random() * Math.max(maxLeft, 20));
 
-      // Minimal vertical jitter on mobile — rows stay cleanly separated
-      const jitterFactor = isMobile ? 0.06 : 0.55;
+      // Overlap reduced 25% on both
+      const jitterFactor = isMobile ? 0.045 : 0.41;
       const top = row * ROW_H + Math.random() * (ROW_H * jitterFactor) + 60;
 
       // Subtle rotation on mobile
