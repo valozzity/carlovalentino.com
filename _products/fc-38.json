@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-38.webp"
+    "shop-images/frame-38.webp",
+    "shop-images/three-musketeers-secondary.webp"
   ],
   "stripe_link": ""
 }
