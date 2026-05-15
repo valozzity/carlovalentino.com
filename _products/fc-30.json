@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-30.webp"
+    "shop-images/frame-30.webp",
+    "shop-images/stubby-secondary.webp"
   ],
   "stripe_link": ""
 }
