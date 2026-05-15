@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: valozzity/carlovalentino.com
+  branch: main
+
+media_folder: shop-images
+public_folder: shop-images
+
+collections:
+  - name: products
+    label: Products
+    label_singular: Product
+    folder: _products
+    create: true
+    format: json
+    slug: "{{id}}"
+    identifier_field: id
+    summary: "{{title}} — {{status}}"
+    fields:
+      - label: ID
+        name: id
+        widget: string
+        hint: "Unique ID e.g. fc-100 — no spaces"
+      - label: Title
+        name: title
+        widget: string
+        required: false
+      - label: Price (USD)
+        name: price
+        widget: number
+        value_type: float
+        required: false
+        hint: "e.g. 350"
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - { label: "Available", value: available }
+          - { label: "Sold", value: sold }
+          - { label: "Reserved", value: reserved }
+        default: available
+      - label: Images
+        name: images
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
+      - label: Stripe Payment Link
+        name: stripe_link
+        widget: string
+        required: false
+        hint: "Paste Stripe Payment Link URL when ready"
