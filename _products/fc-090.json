@@ -1,9 +1,9 @@
 {
   "id": "fc-090",
-  "title": "",
-  "price": null,
-  "description": "",
-  "status": "available",
+  "title": "Red Coup",
+  "price": 100,
+  "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
+  "status": "sold",
   "images": [
     "shop-images/frame-090.webp"
   ],
