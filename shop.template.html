@@ -503,11 +503,11 @@
 
   function openModal(p) {
     const status = p.status || 'available';
-    const isSold = status === 'sold' || status === 'reserved';
+    const isSold = status === 'sold' || status === 'reserved' || status === 'wheatpasted';
     const priceLine = p.price ? `$${p.price}` : `<span class="empty-field">price tbd</span>`;
     const titleLine = p.title || `<span class="empty-field">untitled — ${p.id}</span>`;
     const descLine  = p.description || `<span class="empty-field">description coming soon.</span>`;
-    const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : 'Available';
+    const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : status === 'wheatpasted' ? 'Wheatpasted' : 'Available';
     const images = (p.images || []).map(src =>
       `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`
     ).join('');
