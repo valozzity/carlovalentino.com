@@ -13,15 +13,13 @@ collections:
     folder: _products
     create: true
     format: json
-    slug: "{{id}}"
-    identifier_field: id
+    slug: "{{title | slug}}"
+    identifier_field: title
     summary: "{{title}} — {{status}}"
     fields:
       - label: ID
         name: id
-        widget: string
-        hint: "Unique ID e.g. fc-100 — no spaces"
-        pattern: ['^[a-z0-9-]+$', "Lowercase letters, numbers, and hyphens only"]
+        widget: hidden
       - label: Title
         name: title
         widget: string
