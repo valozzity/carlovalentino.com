@@ -396,12 +396,21 @@
 
     .newsletter-back-button:hover { text-decoration: underline; }
 
-    /* ── PLAY BUTTON ── */
-    .play-btn {
+    /* ── ACTION BUTTONS (Play / Shop split) ── */
+    .action-row {
       display: flex;
-      align-items: center;
       width: 100%;
       max-width: 580px;
+      margin-bottom: 28px;
+      border: 2px solid var(--green);
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.72s forwards;
+    }
+    .action-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 10px;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(14px, 1.4vw, 18px);
@@ -410,16 +419,13 @@
       text-transform: uppercase;
       color: var(--green);
       background: transparent;
-      border: 2px solid var(--green);
-      padding: 14px 28px;
+      padding: 14px 20px;
       text-decoration: none;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.72s forwards;
       cursor: none;
       transition: background .15s, color .15s;
     }
-    .play-btn:hover, .play-btn:active {
+    .action-btn + .action-btn { border-left: 2px solid var(--green); }
+    .action-btn:hover, .action-btn:active {
       background: var(--green);
       color: #000000;
     }
@@ -502,7 +508,10 @@
     <button class="newsletter-back-button" type="button" style="display:none">← back</button>
   </div>
 
-  <a href="https://fightclubbers.netlify.app/" class="play-btn" target="_blank" rel="noopener noreferrer">&#9654; Play Now</a>
+  <div class="action-row">
+    <a href="https://fightclubbers.netlify.app/" class="action-btn" target="_blank" rel="noopener noreferrer">&#9654; Play Now</a>
+    <a href="/shop.html" class="action-btn">Shop</a>
+  </div>
 
   <div class="desc-block">
     <p class="desc">
