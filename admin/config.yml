@@ -21,6 +21,7 @@ collections:
         name: id
         widget: string
         hint: "Unique ID e.g. fc-100 — no spaces"
+        pattern: ['^[a-z0-9-]+$', "Lowercase letters, numbers, and hyphens only"]
       - label: Title
         name: title
         widget: string
