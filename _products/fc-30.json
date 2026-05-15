@@ -7,7 +7,8 @@
   "images": [
     "shop-images/frame-30.webp",
     "shop-images/stubby-secondary.webp",
-    "shop-images/stubby-secondary-1.webp"
+    "shop-images/stubby-secondary-1.webp",
+    "shop-images/stubby-secondary-2.webp"
   ],
   "stripe_link": ""
 }
