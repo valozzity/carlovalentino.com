@@ -526,8 +526,9 @@
     const images = (p.images || []).map(src =>
       `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`
     ).join('');
-    const buyDisabled = !p.stripe_link || isSold;
-    const buyHref  = p.stripe_link || '#';
+    const stripeLink = (p.stripe_link || '').trim();
+    const buyDisabled = !stripeLink || isSold;
+    const buyHref  = stripeLink || '#';
     const buyLabel = isSold ? (status === 'sold' ? 'Sold Out' : status === 'wheatpasted' ? 'Wheatpasted' : 'Reserved') : 'Buy Now';
 
     modalInner.innerHTML = `
