@@ -411,10 +411,10 @@
   const hoverLabel = document.getElementById('hoverLabel');
   const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-  // Target rendered height — all images normalized to this height
-  const TARGET_H = isMobile ? 200 : 290;
-  const COLS = isMobile ? 1 : 3;
-  const ROW_H = TARGET_H + (isMobile ? 60 : 90);
+  const COLS  = isMobile ? 1 : 3;
+  const BASE_W = isMobile ? Math.min(window.innerWidth * 0.62, 300) : Math.min(window.innerWidth * 0.22, 360);
+  const ROW_H  = isMobile ? 360 : 420;
+  const MAX_H  = isMobile ? 280 : 340; // portrait images capped to this height
 
   // Scroll-reveal via IntersectionObserver
   const revealObserver = new IntersectionObserver((entries) => {
@@ -426,34 +426,45 @@
     });
   }, { threshold: 0.05, rootMargin: '80px 0px' });
 
-  function adjustWidth(img, el, col, jitterX) {
+  function normalizeSize(img, el, scale) {
     if (!img.naturalWidth) return;
     const aspect = img.naturalWidth / img.naturalHeight;
-    const newW = Math.round(TARGET_H * aspect);
-    const vw = window.innerWidth;
-    const colW = vw / COLS;
-    el.style.width = newW + 'px';
-    el.style.left  = Math.max(8, col * colW + colW / 2 - newW / 2 + jitterX) + 'px';
+    const isPortrait = img.naturalHeight > img.naturalWidth;
+    let w;
+    if (isPortrait) {
+      // cap portrait height so it matches landscape visual weight
+      w = Math.round(MAX_H * aspect * scale);
+    } else {
+      w = Math.round(BASE_W * scale);
+    }
+    el.style.width = Math.max(80, w) + 'px';
   }
 
   function layoutProducts(products) {
     canvas.innerHTML = '';
     const vw = window.innerWidth;
     const colW = vw / COLS;
-    const defaultW = TARGET_H * 1.32; // landscape assumption until image loads
 
     const totalRows = Math.ceil(products.length / COLS);
-    canvas.style.height = (totalRows * ROW_H + 200) + 'px';
+    canvas.style.height = (totalRows * ROW_H + 240) + 'px';
 
     products.forEach((p, idx) => {
       const row = Math.floor(idx / COLS);
       const col = idx % COLS;
-      const rot = (Math.random() - 0.5) * 6;
-      const jitterX = isMobile ? 0 : (Math.random() - 0.5) * 50;
-      const jitterY = Math.random() * 40;
 
-      const left = Math.max(8, col * colW + colW / 2 - defaultW / 2 + jitterX);
-      const top  = row * ROW_H + jitterY + 80;
+      // Per-image random scale for size variety
+      const scale = 0.72 + Math.random() * 0.65;
+      const defaultW = BASE_W * scale;
+
+      // Loose random placement within column slot — full slot width available
+      const maxLeft = colW - defaultW - 12;
+      const left = col * colW + Math.max(12, Math.random() * Math.max(maxLeft, 40));
+
+      // Heavy vertical jitter so rows bleed into each other
+      const top = row * ROW_H + Math.random() * (ROW_H * 0.55) + 60;
+
+      // More rotation for organic feel
+      const rot = (Math.random() - 0.5) * 10;
 
       const el = document.createElement('div');
       el.className = 'product';
@@ -465,8 +476,8 @@
       img.alt = p.title || '';
       img.loading = idx < 6 ? 'eager' : 'lazy';
 
-      img.addEventListener('load', () => adjustWidth(img, el, col, jitterX), { once: true });
-      if (img.complete && img.naturalWidth) adjustWidth(img, el, col, jitterX);
+      img.addEventListener('load', () => normalizeSize(img, el, scale), { once: true });
+      if (img.complete && img.naturalWidth) normalizeSize(img, el, scale);
 
       el.appendChild(img);
       el.addEventListener('click', () => openModal(p));
