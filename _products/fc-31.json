@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-31.webp"
+    "shop-images/frame-31.webp",
+    "shop-images/electric-secondary.webp"
   ],
   "stripe_link": ""
 }
