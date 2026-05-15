@@ -1,9 +1,9 @@
 {
   "id": "fc-31",
   "title": "electric",
-  "price": null,
+  "price": 100,
   "description": "",
-  "status": "available",
+  "status": "wheatpasted",
   "images": [
     "shop-images/frame-31.webp",
     "shop-images/electric-secondary.webp",
