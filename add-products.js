@@ -85,5 +85,5 @@ for (const { dir, file } of pairs) {
 
 console.log(`\nDone: ${added} added, ${skipped} skipped (duplicates).`);
 if (added > 0) {
-  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add new products" && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
+  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add new products" && /opt/homebrew/bin/git pull origin main --rebase && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
 }

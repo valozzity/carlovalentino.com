@@ -93,5 +93,5 @@ for (const { dir: imgDir, file: img } of pairs) {
 
 console.log(`\nDone: ${matched} added, ${skipped} skipped.`);
 if (matched > 0) {
-  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add secondary images" && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
+  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add secondary images" && /opt/homebrew/bin/git pull origin main --rebase && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
 }
