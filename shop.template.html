@@ -412,9 +412,9 @@
   const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
   const COLS  = isMobile ? 2 : 3;
-  const BASE_W = isMobile ? Math.min(window.innerWidth * 0.24, 100) : Math.min(window.innerWidth * 0.22, 360);
-  const ROW_H  = isMobile ? 200 : 420;
-  const MAX_H  = isMobile ? 110 : 340;
+  const BASE_W = isMobile ? Math.min(window.innerWidth * 0.38, 160) : Math.min(window.innerWidth * 0.22, 360);
+  const ROW_H  = isMobile ? 260 : 420;
+  const MAX_H  = isMobile ? 170 : 340;
 
   // Scroll-reveal via IntersectionObserver
   const revealObserver = new IntersectionObserver((entries) => {
