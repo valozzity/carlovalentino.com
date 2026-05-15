@@ -1,0 +1,11 @@
+{
+  "id": "fc-32",
+  "title": "squad",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-32.webp"
+  ],
+  "stripe_link": ""
+}
