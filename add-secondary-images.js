@@ -86,7 +86,7 @@ for (const { dir: imgDir, file: img } of pairs) {
     console.log(`✓ "${img}" → "${outFile}" added to "${product.data.title}"`);
     matched++;
   } else {
-    console.log(`— "${outFile}" already in "${product.data.title}", skipping`);
+    console.warn(`⚠ DUPLICATE — "${outFile}" already exists in "${product.data.title}". Skipping.`);
     skipped++;
   }
 }
