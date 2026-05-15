@@ -6,7 +6,10 @@
   "status": "available",
   "images": [
     "shop-images/frame-19.webp",
-    "shop-images/abott-secondary.webp"
+    "shop-images/abott-secondary.webp",
+    "shop-images/abott-secondary-1.webp",
+    "shop-images/abott-secondary-2.webp",
+    "shop-images/abott-secondary-3.webp"
   ],
   "stripe_link": ""
 }
