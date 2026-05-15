@@ -1,9 +1,9 @@
 {
   "id": "fc-18",
-  "title": "",
-  "price": null,
+  "title": "Pounce",
+  "price": 100,
   "description": "",
-  "status": "available",
+  "status": "wheatpasted",
   "images": [
     "shop-images/frame-18.webp"
   ],
