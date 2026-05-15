@@ -6,7 +6,8 @@
   "status": "available",
   "images": [
     "shop-images/frame-31.webp",
-    "shop-images/electric-secondary.webp"
+    "shop-images/electric-secondary.webp",
+    "shop-images/electric-secondary-1.webp"
   ],
   "stripe_link": ""
 }
