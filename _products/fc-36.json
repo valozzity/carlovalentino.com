@@ -6,7 +6,8 @@
   "status": "available",
   "images": [
     "shop-images/frame-36.webp",
-    "shop-images/ozzy-secondary.webp"
+    "shop-images/ozzy-secondary.webp",
+    "shop-images/ozzy-secondary-1.webp"
   ],
   "stripe_link": ""
 }
