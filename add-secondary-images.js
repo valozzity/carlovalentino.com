@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Usage: node add-secondary-images.js <folder-of-images>
-// Images must be named after the artwork title, e.g. "draco.png"
-// Matches case-insensitively to product titles and adds as secondary images.
+// Images named after artwork title, with optional trailing number for multiples:
+//   fire flame.png, fire flame 1.png, fire flame 2.png → all go to "fire flame"
 
 const fs = require('fs');
 const path = require('path');
@@ -24,39 +24,54 @@ const products = fs.readdirSync(productsDir)
     data: JSON.parse(fs.readFileSync(path.join(productsDir, f), 'utf8')),
   }));
 
-// Process each image in the input folder
+// Strip trailing " 1", " 2" etc to get the base title for matching
+function baseTitle(nameNoExt) {
+  return nameNoExt.replace(/\s+\d+$/, '').trim().toLowerCase();
+}
+
+// Build a unique output filename that doesn't already exist
+function uniqueOutFile(slug) {
+  let candidate = `${slug}-secondary.webp`;
+  let i = 1;
+  while (fs.existsSync(path.join(shopImagesDir, candidate))) {
+    candidate = `${slug}-secondary-${i}.webp`;
+    i++;
+  }
+  return candidate;
+}
+
 const images = fs.readdirSync(inputDir)
-  .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f));
+  .filter(f => /\.(png|jpg|jpeg|webp|tiff|heic)$/i.test(f))
+  .sort();
 
 let matched = 0, skipped = 0;
 
 for (const img of images) {
-  const nameNoExt = path.basename(img, path.extname(img)).trim().toLowerCase();
+  const nameNoExt = path.basename(img, path.extname(img)).trim();
+  const titleKey = baseTitle(nameNoExt);
 
   const product = products.find(p =>
-    (p.data.title || '').trim().toLowerCase() === nameNoExt
+    (p.data.title || '').trim().toLowerCase() === titleKey
   );
 
   if (!product) {
-    console.log(`⚠ No match for "${img}" — no product with title "${nameNoExt}"`);
+    console.log(`⚠ No match for "${img}" — no product titled "${titleKey}"`);
     skipped++;
     continue;
   }
 
-  // Convert to webp and save to shop-images
-  const slug = nameNoExt.replace(/\s+/g, '-');
-  const outFile = `${slug}-secondary.webp`;
+  const slug = titleKey.replace(/\s+/g, '-');
+  const outFile = uniqueOutFile(slug);
   const outPath = path.join(shopImagesDir, outFile);
   const srcPath = path.join(inputDir, img);
 
   execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 
-  // Add to product images if not already there
   const imgRef = `shop-images/${outFile}`;
   if (!product.data.images.includes(imgRef)) {
     product.data.images.push(imgRef);
     fs.writeFileSync(product.file, JSON.stringify(product.data, null, 2));
-    console.log(`✓ Added "${outFile}" to "${product.data.title}" (${path.basename(product.file)})`);
+    console.log(`✓ "${img}" → "${outFile}" added to "${product.data.title}"`);
     matched++;
   } else {
     console.log(`— "${outFile}" already in "${product.data.title}", skipping`);
