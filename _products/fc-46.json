@@ -1,0 +1,11 @@
+{
+  "id": "fc-46",
+  "title": "beer die",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-46.webp"
+  ],
+  "stripe_link": ""
+}
