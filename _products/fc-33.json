@@ -1,0 +1,11 @@
+{
+  "id": "fc-33",
+  "title": "squat",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-33.webp"
+  ],
+  "stripe_link": ""
+}
