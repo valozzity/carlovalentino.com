@@ -4,7 +4,9 @@
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "images": [
-    "shop-images/hot-boi.png",
-    "shop-images/hot-boi-1.png"
-  ]
+    "shop-images/frame-13.webp",
+    "shop-images/hot-boi-secondary.webp",
+    "shop-images/hot-boi-secondary-1.webp"
+  ],
+  "stripe_link": ""
 }
