@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-35.webp"
+    "shop-images/frame-35.webp",
+    "shop-images/el-tigre-secondary.webp"
   ],
   "stripe_link": ""
 }
