@@ -65,4 +65,6 @@ for (const img of images) {
 }
 
 console.log(`\nDone: ${added} product(s) added.`);
-console.log('\nRun: git add shop-images/ _products/ && git commit -m "Add new products" && git push origin main');
+if (added > 0) {
+  execSync('git add shop-images/ _products/ && git commit -m "Add new products" && git push origin main', { stdio: 'inherit' });
+}

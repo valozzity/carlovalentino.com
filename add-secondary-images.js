@@ -81,5 +81,5 @@ for (const img of images) {
 
 console.log(`\nDone: ${matched} added, ${skipped} skipped.`);
 if (matched > 0) {
-  console.log('\nRun: git add shop-images/ _products/ && git commit -m "Add secondary images" && git push origin main');
+  execSync('git add shop-images/ _products/ && git commit -m "Add secondary images" && git push origin main', { stdio: 'inherit' });
 }
