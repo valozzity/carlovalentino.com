@@ -1,11 +1,11 @@
 {
-  "id": "fc-094",
-  "title": "Wild Hog",
+  "id": "fc-6",
+  "title": "Kirby",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-094.webp"
+    "shop-images/frame-6.webp"
   ],
   "stripe_link": ""
 }

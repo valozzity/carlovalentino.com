@@ -1,11 +1,11 @@
 {
-  "id": "fc-093",
-  "title": "Duo",
+  "id": "fc-4",
+  "title": "Draco",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-093.webp"
+    "shop-images/frame-4.webp"
   ],
   "stripe_link": ""
 }

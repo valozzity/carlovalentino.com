@@ -1,11 +1,11 @@
 {
-  "id": "fc-090",
-  "title": "Red Coup",
+  "id": "fc-11",
+  "title": "Peace Out",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
-  "status": "sold",
+  "status": "available",
   "images": [
-    "shop-images/frame-090.webp"
+    "shop-images/frame-11.webp"
   ],
   "stripe_link": ""
 }

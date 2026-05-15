@@ -1,11 +1,11 @@
 {
-  "id": "fc-088",
-  "title": "Lance",
+  "id": "fc-14",
+  "title": "Fink & Dink",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-088.webp"
+    "shop-images/frame-14.webp"
   ],
   "stripe_link": ""
 }

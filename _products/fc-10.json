@@ -1,11 +1,11 @@
 {
-  "id": "fc-097",
-  "title": "Hot Boi",
+  "id": "fc-10",
+  "title": "Wild Hog",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-097.webp"
+    "shop-images/frame-10.webp"
   ],
   "stripe_link": ""
 }

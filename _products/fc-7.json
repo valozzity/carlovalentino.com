@@ -1,11 +1,11 @@
 {
-  "id": "fc-087",
-  "title": "Draco",
+  "id": "fc-7",
+  "title": "Red Coup",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
-  "status": "available",
+  "status": "sold",
   "images": [
-    "shop-images/frame-087.webp"
+    "shop-images/frame-7.webp"
   ],
   "stripe_link": ""
 }

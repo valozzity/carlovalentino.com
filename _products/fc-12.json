@@ -1,11 +1,11 @@
 {
-  "id": "fc-099",
-  "title": "Scorpio",
+  "id": "fc-12",
+  "title": "Three's a Party",
   "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-099.webp"
+    "shop-images/frame-12.webp"
   ],
   "stripe_link": ""
 }

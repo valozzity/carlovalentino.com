@@ -1,11 +1,11 @@
 {
-  "id": "fc-086",
-  "title": "Fire Flame",
-  "price": 125,
+  "id": "fc-8",
+  "title": "Trio",
+  "price": 100,
   "description": "18\"x24\" Spraypaint + Airbrush on Newsprint. 2026, Framed.",
   "status": "available",
   "images": [
-    "shop-images/frame-086.webp"
+    "shop-images/frame-8.webp"
   ],
   "stripe_link": ""
 }
