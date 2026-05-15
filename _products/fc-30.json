@@ -1,9 +1,9 @@
 {
   "id": "fc-30",
   "title": "stubby",
-  "price": null,
+  "price": 98,
   "description": "",
-  "status": "available",
+  "status": "wheatpasted",
   "images": [
     "shop-images/frame-30.webp",
     "shop-images/stubby-secondary.webp",
