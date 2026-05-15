@@ -1,11 +1,12 @@
 {
-  "id": "fc-083",
-  "title": "",
-  "price": null,
-  "description": "",
+  "id": "martini time",
+  "title": "Martini Time",
+  "price": 100,
+  "description": "24\"x18\" spraypaint and airbrush on newsprint. 2026.",
   "status": "available",
   "images": [
-    "shop-images/frame-083.webp"
+    "shop-images/frame-083.webp",
+    "shop-images/image-69.png"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_4gMbJ20DQgGO6dGd2Zfw400"
 }
