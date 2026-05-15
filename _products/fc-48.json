@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-48.webp"
+    "shop-images/frame-48.webp",
+    "shop-images/mushy---die-secondary.webp"
   ],
   "stripe_link": ""
 }
