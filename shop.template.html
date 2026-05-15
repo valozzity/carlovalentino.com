@@ -298,6 +298,19 @@
       pointer-events: none;
     }
 
+    .catalog-count {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 24px 80px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 500;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     .empty-field { color: var(--muted); font-style: italic; }
 
     @media (max-width: 767px) {
@@ -329,6 +342,8 @@
 </header>
 
 <div class="canvas" id="canvas"></div>
+
+<div class="catalog-count" id="catalogCount"></div>
 
 <div class="hover-label" id="hoverLabel"></div>
 
@@ -544,6 +559,7 @@
   // ── INIT ──
   const PRODUCTS = @@PRODUCTS@@;
   layoutProducts(PRODUCTS);
+  document.getElementById('catalogCount').textContent = `# ${PRODUCTS.length} fighters painted`;
 
   let resizeT;
   window.addEventListener('resize', () => {
