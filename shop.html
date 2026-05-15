@@ -604,14 +604,27 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
+  // ── PRODUCTS DATA (edit products.json then sync here) ──
+  const PRODUCTS = [
+    { id: 'fc-083', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-083.webp'], stripe_link: null },
+    { id: 'fc-085', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-085.webp'], stripe_link: null },
+    { id: 'fc-086', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-086.webp'], stripe_link: null },
+    { id: 'fc-087', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-087.webp'], stripe_link: null },
+    { id: 'fc-088', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-088.webp'], stripe_link: null },
+    { id: 'fc-089', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-089.webp'], stripe_link: null },
+    { id: 'fc-090', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-090.webp'], stripe_link: null },
+    { id: 'fc-091', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-091.webp'], stripe_link: null },
+    { id: 'fc-093', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-093.webp'], stripe_link: null },
+    { id: 'fc-094', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-094.webp'], stripe_link: null },
+    { id: 'fc-095', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-095.webp'], stripe_link: null },
+    { id: 'fc-096', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-096.webp'], stripe_link: null },
+    { id: 'fc-097', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-097.webp'], stripe_link: null },
+    { id: 'fc-098', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-098.webp'], stripe_link: null },
+    { id: 'fc-099', title: '', price: null, description: '', status: 'available', images: ['shop-images/frame-099.webp'], stripe_link: null },
+  ];
+
   // ── LOAD ──
-  fetch('products.json')
-    .then(r => r.json())
-    .then(data => layoutProducts(data.products || []))
-    .catch(err => {
-      console.error('Failed to load products:', err);
-      canvas.innerHTML = '<p style="text-align:center;padding:80px 20px;color:#fff;">Could not load products.</p>';
-    });
+  layoutProducts(PRODUCTS);
 
   // Reflow on resize
   let resizeT;
@@ -619,7 +632,7 @@
     clearTimeout(resizeT);
     resizeT = setTimeout(() => {
       canvas.innerHTML = '';
-      fetch('products.json').then(r => r.json()).then(d => layoutProducts(d.products || []));
+      layoutProducts(PRODUCTS);
     }, 250);
   });
 </script>
