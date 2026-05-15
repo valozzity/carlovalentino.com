@@ -68,5 +68,5 @@ for (const { dir, file } of pairs) {
 
 console.log(`\nDone: ${added} product(s) added.`);
 if (added > 0) {
-  execSync('git add shop-images/ _products/ && git commit -m "Add new products" && git push origin main', { stdio: 'inherit' });
+  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add new products" && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
 }
