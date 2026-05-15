@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-27.webp"
+    "shop-images/frame-27.webp",
+    "shop-images/tyson-secondary.webp"
   ],
   "stripe_link": ""
 }
