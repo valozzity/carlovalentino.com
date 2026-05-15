@@ -5,7 +5,8 @@
   "description": "24\"x18\" spraypaint and airbrush on newsprint. 2026. Wheatpasted on Abott Kinney Blvd.",
   "status": "available",
   "images": [
-    "shop-images/frame-19.webp"
+    "shop-images/frame-19.webp",
+    "shop-images/abott-secondary.webp"
   ],
   "stripe_link": ""
 }
