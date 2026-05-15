@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node build.js",
-    "add-secondary": "node add-secondary-images.js"
+    "add-secondary": "node add-secondary-images.js",
+    "add-products": "node add-products.js"
   }
 }
