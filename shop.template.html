@@ -44,7 +44,6 @@
       transition: background 0.4s ease-out;
     }
 
-    /* Grain texture */
     body::before {
       content: '';
       position: fixed;
@@ -56,7 +55,6 @@
       z-index: 1;
     }
 
-    /* Custom cursor */
     .cursor, .cursor-trail {
       position: fixed;
       pointer-events: none;
@@ -67,7 +65,6 @@
     .cursor svg, .cursor-trail svg { width: 100%; height: 100%; }
     .cursor-trail { width: 20px; height: 20px; z-index: 9998; }
 
-    /* Registration marks */
     .reg {
       position: fixed;
       width: 18px;
@@ -75,11 +72,7 @@
       pointer-events: none;
       z-index: 100;
     }
-    .reg::before, .reg::after {
-      content: '';
-      position: absolute;
-      background: var(--green);
-    }
+    .reg::before, .reg::after { content: ''; position: absolute; background: var(--green); }
     .reg::before { width: 1px; height: 18px; left: 50%; }
     .reg::after  { width: 18px; height: 1px; top: 50%; left: 0; }
     .reg-tl { top: 20px; left: 20px;  animation: regPulse 4.8s ease-in-out infinite 0s; }
@@ -92,7 +85,6 @@
       50%       { opacity: 0.25; transform: scale(0.7); }
     }
 
-    /* Header */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -134,24 +126,24 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Canvas */
     .canvas {
       position: relative;
       width: 100%;
       padding-top: 120px;
-      padding-bottom: 80px;
+      padding-bottom: 120px;
       z-index: 2;
     }
 
     .product {
       position: absolute;
       cursor: none;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
       opacity: 0;
-      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform-origin: center center;
+      transition: opacity 0.7s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
       filter: drop-shadow(0 12px 32px rgba(0,0,0,0.35));
-      will-change: transform;
+      will-change: transform, opacity;
     }
+    .product.visible { opacity: 1; }
     .product img {
       display: block;
       width: 100%;
@@ -164,11 +156,6 @@
       z-index: 10;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Hover label (skylrk-style bottom bar) */
     .hover-label {
       position: fixed;
       bottom: 24px;
@@ -191,33 +178,6 @@
       white-space: nowrap;
     }
     .hover-label.visible { opacity: 1; }
-
-    /* Browse All */
-    .browse-all-wrap {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      padding: 80px 24px 60px;
-      z-index: 3;
-    }
-    .browse-all {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 16px;
-      font-weight: 750;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--fg);
-      background: transparent;
-      border: 2px solid var(--fg);
-      padding: 18px 36px;
-      text-decoration: none;
-      cursor: none;
-      transition: background .2s, color .2s, border-color .2s;
-    }
-    .browse-all:hover { background: var(--fg); color: #000; }
 
     /* Modal */
     .modal {
@@ -266,19 +226,10 @@
       display: block;
       border: 1px solid var(--border);
     }
-
     .modal-meta {
       padding: 32px 0 0;
       border-top: 1px solid var(--border);
       margin-top: 24px;
-    }
-    .modal-id {
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: .35em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 12px;
     }
     .modal-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -347,18 +298,14 @@
       pointer-events: none;
     }
 
-    /* Empty state for missing metadata */
     .empty-field { color: var(--muted); font-style: italic; }
 
-    /* Mobile */
     @media (max-width: 767px) {
       header { padding: 20px 20px; }
-      .canvas { padding-top: 100px; padding-bottom: 60px; }
-      .browse-all-wrap { padding: 60px 20px 50px; }
-      .browse-all { font-size: 14px; padding: 16px 28px; }
+      .canvas { padding-top: 100px; padding-bottom: 80px; }
       .hover-label { display: none; }
       body { cursor: auto; }
-      .product, .browse-all, .back-link, .modal-close, .modal-buy { cursor: pointer; }
+      .product, .back-link, .modal-close, .modal-buy { cursor: pointer; }
       .reg { width: 14px; height: 14px; }
       .reg::before { height: 14px; }
       .reg::after  { width: 14px; }
@@ -369,40 +316,29 @@
 </head>
 <body>
 
-<!-- Registration marks -->
 <div class="reg reg-tl"></div>
 <div class="reg reg-tr"></div>
 <div class="reg reg-bl"></div>
 <div class="reg reg-br"></div>
 
-<!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
 
-<!-- Header -->
 <header>
   <a href="/" class="back-link">&larr; Home</a>
   <div class="currency-tag">[ FIGHTCLUBBERS ]</div>
 </header>
 
-<!-- Canvas with floating products -->
 <div class="canvas" id="canvas"></div>
 
-<!-- Hover label (desktop) -->
 <div class="hover-label" id="hoverLabel"></div>
 
-<!-- Browse All -->
-<div class="browse-all-wrap">
-  <a href="#browse-all" class="browse-all">Browse All &rarr;</a>
-</div>
-
-<!-- Modal -->
 <div class="modal" id="modal" aria-hidden="true">
   <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
   <div class="modal-inner" id="modalInner"></div>
 </div>
 
 <script>
-  // ── CURSOR (same as main site) ──
+  // ── CURSOR ──
   const EMBLEMS = [
     `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="0" x2="10" y2="20" stroke="#ebebeb" stroke-width="1"/><line x1="0" y1="10" x2="20" y2="10" stroke="#ebebeb" stroke-width="1"/></svg>`,
     `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#ebebeb" stroke-width="1" fill="none"/><circle cx="10" cy="10" r="1.5" fill="#ebebeb"/></svg>`,
@@ -416,8 +352,9 @@
   cursor.innerHTML = EMBLEMS[0];
   const TRAIL_COUNT = 8;
   const trails = [];
-  const history = Array(TRAIL_COUNT).fill({ x: -100, y: -100 });
+  const trailHistory = Array(TRAIL_COUNT).fill({ x: -100, y: -100 });
   let mouseX = -100, mouseY = -100;
+
   for (let i = 0; i < TRAIL_COUNT; i++) {
     const t = document.createElement('div');
     t.className = 'cursor-trail';
@@ -436,16 +373,11 @@
   }
   setInterval(cycleCursor, 2500);
 
-  // ── BACKGROUND: random hue, cursor-reactive position ──
-  const PALETTE = [
-    // hue, sat, light variations chosen to feel like skylrk
-    140, 280, 200, 320, 30, 0, 60, 220, 180
-  ];
-  const baseHue = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-  document.documentElement.style.setProperty('--hue', baseHue);
+  // ── BACKGROUND ──
+  const PALETTE = [140, 280, 200, 320, 30, 0, 60, 220, 180];
+  document.documentElement.style.setProperty('--hue', PALETTE[Math.floor(Math.random() * PALETTE.length)]);
 
-  let targetMx = 50, targetMy = 30;
-  let currentMx = 50, currentMy = 30;
+  let targetMx = 50, targetMy = 30, currentMx = 50, currentMy = 30;
 
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX;
@@ -456,92 +388,87 @@
     targetMy = (mouseY / window.innerHeight) * 100;
   });
 
-  // Trail + smooth gradient follow
   (function animate() {
-    history.unshift({ x: mouseX, y: mouseY });
-    history.pop();
+    trailHistory.unshift({ x: mouseX, y: mouseY });
+    trailHistory.pop();
     trails.forEach((t, i) => {
-      const p = history[i];
+      const p = trailHistory[i];
       const ratio = (TRAIL_COUNT - i) / TRAIL_COUNT;
       t.style.left      = p.x + 'px';
       t.style.top       = p.y + 'px';
       t.style.opacity   = ratio * 0.45;
       t.style.transform = `translate(-50%,-50%) scale(${ratio})`;
     });
-
-    // Smooth ease toward cursor for gradient
     currentMx += (targetMx - currentMx) * 0.06;
     currentMy += (targetMy - currentMy) * 0.06;
     document.documentElement.style.setProperty('--mx', currentMx + '%');
     document.documentElement.style.setProperty('--my', currentMy + '%');
-
     requestAnimationFrame(animate);
   })();
 
-  // ── PRODUCTS: load JSON and lay out ──
-  const MAX_DESKTOP = 20;
-  const MAX_MOBILE  = 10;
-  const isMobile = window.matchMedia('(max-width: 767px)').matches;
-  const maxShown = isMobile ? MAX_MOBILE : MAX_DESKTOP;
-
+  // ── LAYOUT ──
   const canvas = document.getElementById('canvas');
   const hoverLabel = document.getElementById('hoverLabel');
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-  function shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+  // Target rendered height — all images normalized to this height
+  const TARGET_H = isMobile ? 200 : 290;
+  const COLS = isMobile ? 1 : 3;
+  const ROW_H = TARGET_H + (isMobile ? 60 : 90);
+
+  // Scroll-reveal via IntersectionObserver
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '80px 0px' });
+
+  function adjustWidth(img, el, col, jitterX) {
+    if (!img.naturalWidth) return;
+    const aspect = img.naturalWidth / img.naturalHeight;
+    const newW = Math.round(TARGET_H * aspect);
+    const vw = window.innerWidth;
+    const colW = vw / COLS;
+    el.style.width = newW + 'px';
+    el.style.left  = Math.max(8, col * colW + colW / 2 - newW / 2 + jitterX) + 'px';
   }
 
   function layoutProducts(products) {
-    const shown = shuffle(products).slice(0, maxShown);
+    canvas.innerHTML = '';
     const vw = window.innerWidth;
+    const colW = vw / COLS;
+    const defaultW = TARGET_H * 1.32; // landscape assumption until image loads
 
-    // Grid: mobile = 1 per row, desktop = 3 per row, with slot variation
-    const cols = isMobile ? 1 : 3;
-    const rowH = isMobile ? 380 : 320;
-    const baseImgW = isMobile ? Math.min(vw * 0.65, 320) : Math.min(vw * 0.22, 360);
+    const totalRows = Math.ceil(products.length / COLS);
+    canvas.style.height = (totalRows * ROW_H + 200) + 'px';
 
-    const totalRows = Math.ceil(shown.length / cols);
-    canvas.style.height = (totalRows * rowH + 200) + 'px';
+    products.forEach((p, idx) => {
+      const row = Math.floor(idx / COLS);
+      const col = idx % COLS;
+      const rot = (Math.random() - 0.5) * 6;
+      const jitterX = isMobile ? 0 : (Math.random() - 0.5) * 50;
+      const jitterY = Math.random() * 40;
 
-    shown.forEach((p, idx) => {
-      const row = Math.floor(idx / cols);
-      const col = idx % cols;
-      const colWidth = vw / cols;
-
-      // Random width within range
-      const widthVariance = 0.7 + Math.random() * 0.6; // 0.7 - 1.3
-      const imgW = baseImgW * widthVariance;
-
-      // Random position within column slot
-      const maxLeft = colWidth - imgW - 20;
-      const left = col * colWidth + Math.max(20, Math.random() * Math.max(maxLeft, 40));
-
-      // Random vertical jitter within row
-      const top = row * rowH + Math.random() * (rowH - 220);
-
-      // Slight random rotation
-      const rot = (Math.random() - 0.5) * 5;
+      const left = Math.max(8, col * colW + colW / 2 - defaultW / 2 + jitterX);
+      const top  = row * ROW_H + jitterY + 80;
 
       const el = document.createElement('div');
       el.className = 'product';
-      el.style.left = left + 'px';
-      el.style.top = top + 'px';
-      el.style.width = imgW + 'px';
-      el.style.transform = `rotate(${rot}deg)`;
-      el.style.animationDelay = (0.05 * idx) + 's';
+      el.style.cssText = `left:${left}px;top:${top}px;width:${defaultW}px;transform:rotate(${rot}deg)`;
       el.dataset.id = p.id;
 
       const img = document.createElement('img');
       img.src = p.images[0];
-      img.alt = p.title || p.id;
+      img.alt = p.title || '';
       img.loading = idx < 6 ? 'eager' : 'lazy';
-      el.appendChild(img);
 
+      img.addEventListener('load', () => adjustWidth(img, el, col, jitterX), { once: true });
+      if (img.complete && img.naturalWidth) adjustWidth(img, el, col, jitterX);
+
+      el.appendChild(img);
       el.addEventListener('click', () => openModal(p));
 
       if (!isMobile) {
@@ -553,6 +480,7 @@
       }
 
       canvas.appendChild(el);
+      revealObserver.observe(el);
     });
   }
 
@@ -566,15 +494,13 @@
     const isSold = status === 'sold' || status === 'reserved';
     const priceLine = p.price ? `$${p.price}` : `<span class="empty-field">price tbd</span>`;
     const titleLine = p.title || `<span class="empty-field">untitled — ${p.id}</span>`;
-    const descLine = p.description || `<span class="empty-field">description coming soon.</span>`;
+    const descLine  = p.description || `<span class="empty-field">description coming soon.</span>`;
     const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : 'Available';
-
     const images = (p.images || []).map(src =>
       `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`
     ).join('');
-
     const buyDisabled = !p.stripe_link || isSold;
-    const buyHref = p.stripe_link || '#';
+    const buyHref  = p.stripe_link || '#';
     const buyLabel = isSold ? (status === 'sold' ? 'Sold Out' : 'Reserved') : 'Buy Now';
 
     modalInner.innerHTML = `
@@ -603,20 +529,14 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
-  // ── PRODUCTS DATA (injected by build.js — edit via /admin) ──
+  // ── INIT ──
   const PRODUCTS = @@PRODUCTS@@;
-
-  // ── LOAD ──
   layoutProducts(PRODUCTS);
 
-  // Reflow on resize
   let resizeT;
   window.addEventListener('resize', () => {
     clearTimeout(resizeT);
-    resizeT = setTimeout(() => {
-      canvas.innerHTML = '';
-      layoutProducts(PRODUCTS);
-    }, 250);
+    resizeT = setTimeout(() => layoutProducts(PRODUCTS), 250);
   });
 </script>
 
