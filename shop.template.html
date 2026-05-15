@@ -513,7 +513,7 @@
     ).join('');
     const buyDisabled = !p.stripe_link || isSold;
     const buyHref  = p.stripe_link || '#';
-    const buyLabel = isSold ? (status === 'sold' ? 'Sold Out' : 'Reserved') : 'Buy Now';
+    const buyLabel = isSold ? (status === 'sold' ? 'Sold Out' : status === 'wheatpasted' ? 'Wheatpasted' : 'Reserved') : 'Buy Now';
 
     modalInner.innerHTML = `
       ${images}
