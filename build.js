@@ -14,7 +14,7 @@ const products = fs.readdirSync(productsDir)
     if (!data.stripe_link) data.stripe_link = null;
     return data;
   })
-  .sort((a, b) => a.id.localeCompare(b.id));
+  .sort((a, b) => (a.id || '').localeCompare(b.id || ''));
 
 // Inject into template
 const template = fs.readFileSync(templatePath, 'utf8');
