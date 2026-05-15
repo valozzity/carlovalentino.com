@@ -77,7 +77,7 @@ for (const { dir: imgDir, file: img } of pairs) {
   const outPath = path.join(shopImagesDir, outFile);
   const srcPath = path.join(imgDir, img);
 
-  execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
+  execSync(`/opt/homebrew/bin/magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 
   const imgRef = `shop-images/${outFile}`;
   if (!product.data.images.includes(imgRef)) {

@@ -48,7 +48,7 @@ for (const { dir, file } of pairs) {
   const srcPath = path.join(dir, file);
   const outPath = path.join(shopImagesDir, imgFile);
 
-  execSync(`magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
+  execSync(`/opt/homebrew/bin/magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 
   const product = {
     id,
