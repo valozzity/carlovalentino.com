@@ -5,7 +5,8 @@
   "description": "18\" x 24\" Spraypaint & Airbrush on Newsprint",
   "status": "available",
   "images": [
-    "shop-images/frame-102.webp"
+    "shop-images/frame-102.webp",
+    "shop-images/preferred-mode-of-transport-secondary.webp"
   ],
   "stripe_link": "https://buy.stripe.com/5kQ3cwgCOfCKeKc3spfw404"
 }
