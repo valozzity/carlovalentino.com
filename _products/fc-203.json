@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-203.webp"
+    "shop-images/frame-203.webp",
+    "shop-images/one-two-secondary.webp"
   ],
   "stripe_link": ""
 }
