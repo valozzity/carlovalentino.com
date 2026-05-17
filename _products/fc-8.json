@@ -1,0 +1,11 @@
+{
+  "id": "fc-8",
+  "title": "you make me thorny",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-8.webp"
+  ],
+  "stripe_link": ""
+}
