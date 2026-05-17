@@ -29,7 +29,7 @@ const existingTitles = new Set(
 const existingNums = existingProducts
   .map(p => parseInt((p.id || '').replace('fc-', ''), 10))
   .filter(n => !isNaN(n));
-let nextN = existingNums.length > 0 ? Math.max(...existingNums) + 1 : 1;
+let nextN = Math.max(200, existingNums.length > 0 ? Math.max(...existingNums) + 1 : 200);
 
 // Resolve list of {dir, file} pairs — works for both folder and single file drops
 const stat = fs.statSync(input);
