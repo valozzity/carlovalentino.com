@@ -6,7 +6,8 @@
   "status": "available",
   "images": [
     "shop-images/frame-105.webp",
-    "shop-images/mushy-secondary.webp"
+    "shop-images/mushy-secondary.webp",
+    "shop-images/mushy-secondary-1.webp"
   ],
   "stripe_link": ""
 }
