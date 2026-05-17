@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-200.webp"
+    "shop-images/frame-200.webp",
+    "shop-images/swag-ii-secondary.webp"
   ],
   "stripe_link": ""
 }
