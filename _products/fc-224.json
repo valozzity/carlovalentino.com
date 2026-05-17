@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-224.webp"
+    "shop-images/frame-224.webp",
+    "shop-images/uppercut-secondary.webp"
   ],
   "stripe_link": ""
 }
