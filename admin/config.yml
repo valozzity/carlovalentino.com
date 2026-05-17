@@ -29,6 +29,7 @@ collections:
         widget: number
         value_type: float
         required: false
+        default: 100
         hint: "e.g. 350"
       - label: Description
         name: description

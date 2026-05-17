@@ -6,6 +6,9 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { createPaymentLink, loadEnv } = require('./stripe-link');
+loadEnv();
+const DEFAULT_PRICE = 100;
 
 const input = process.argv.slice(2).join(' ');
 if (!input) {
@@ -49,6 +52,8 @@ if (pairs.length === 0) {
 
 let added = 0, skipped = 0;
 
+(async () => {
+
 for (const { dir, file } of pairs) {
   const title = path.basename(file, path.extname(file)).trim();
   const titleKey = title.toLowerCase();
@@ -66,14 +71,26 @@ for (const { dir, file } of pairs) {
 
   execSync(`/opt/homebrew/bin/magick "${srcPath}" -resize 1400x1400\\> -quality 85 "${outPath}"`);
 
+  // Generate Stripe payment link
+  let stripeLink = '';
+  if (process.env.STRIPE_KEY) {
+    process.stdout.write(`  generating Stripe link... `);
+    try {
+      stripeLink = await createPaymentLink(title, DEFAULT_PRICE);
+      console.log(`✓ ${stripeLink}`);
+    } catch (e) {
+      console.log(`⚠ Stripe error: ${e.message}`);
+    }
+  }
+
   const product = {
     id,
     title,
-    price: null,
+    price: DEFAULT_PRICE,
     description: '',
     status: 'available',
     images: [`shop-images/${imgFile}`],
-    stripe_link: '',
+    stripe_link: stripeLink,
   };
   fs.writeFileSync(path.join(productsDir, `${id}.json`), JSON.stringify(product, null, 2));
 
@@ -83,7 +100,8 @@ for (const { dir, file } of pairs) {
   added++;
 }
 
-console.log(`\nDone: ${added} added, ${skipped} skipped (duplicates).`);
-if (added > 0) {
-  execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add new products" && /opt/homebrew/bin/git pull origin main --rebase && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
-}
+  console.log(`\nDone: ${added} added, ${skipped} skipped (duplicates).`);
+  if (added > 0) {
+    execSync('/opt/homebrew/bin/git add shop-images/ _products/ && /opt/homebrew/bin/git commit -m "Add new products" && /opt/homebrew/bin/git pull origin main --rebase && /opt/homebrew/bin/git push origin main', { stdio: 'inherit' });
+  }
+})().catch(e => { console.error(e.message); process.exit(1); });

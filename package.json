@@ -5,6 +5,7 @@
   "scripts": {
     "build": "node build.js",
     "add-secondary": "node add-secondary-images.js",
-    "add-products": "node add-products.js"
+    "add-products": "node add-products.js",
+    "stripe-links": "node generate-stripe-links.js"
   }
 }
