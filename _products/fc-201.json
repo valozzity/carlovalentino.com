@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-201.webp"
+    "shop-images/frame-201.webp",
+    "shop-images/jaguar-1-secondary.webp"
   ],
   "stripe_link": ""
 }
