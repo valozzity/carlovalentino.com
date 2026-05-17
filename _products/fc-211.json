@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-211.webp"
+    "shop-images/frame-211.webp",
+    "shop-images/kirby-secondary.webp"
   ],
   "stripe_link": ""
 }
