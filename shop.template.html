@@ -193,26 +193,10 @@
     }
     .modal.open { display: block; }
     .modal-inner {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 60px 48px;
+      padding: 80px 24px 60px;
       position: relative;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      box-sizing: border-box;
-    }
-
-    .modal-images {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-height: calc(100vh - 120px);
-      overflow-y: auto;
     }
     .modal-close {
       position: fixed;
@@ -238,16 +222,14 @@
     .modal-image {
       width: 100%;
       height: auto;
-      max-height: calc(100vh - 120px);
-      object-fit: contain;
+      margin-bottom: 24px;
       display: block;
       border: 1px solid var(--border);
     }
     .modal-meta {
-      flex: 0 0 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 32px 0 0;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
     }
     .modal-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -409,10 +391,7 @@
       .reg { width: 14px; height: 14px; }
       .reg::before { height: 14px; }
       .reg::after  { width: 14px; }
-      .modal-inner { padding: 70px 16px 50px; flex-direction: column; align-items: stretch; min-height: unset; gap: 0; }
-      .modal-images { max-height: none; overflow-y: visible; }
-      .modal-image { max-height: 70vh; }
-      .modal-meta { flex: unset; border-top: 1px solid var(--border); padding-top: 24px; margin-top: 24px; }
+      .modal-inner { padding: 70px 16px 50px; }
       .modal-close { top: 16px; right: 16px; }
     }
   </style>
@@ -617,9 +596,9 @@
     const descLine  = p.description || `<span class="empty-field">description coming soon.</span>`;
     const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : status === 'wheatpasted' ? 'Wheatpasted' : 'Available';
     const modalImgs = (p.images || []).length > 1 ? p.images.slice(1) : p.images;
-    const images = `<div class="modal-images">${
-      modalImgs.map(src => `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`).join('')
-    }</div>`;
+    const images = modalImgs.map(src =>
+      `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`
+    ).join('');
     const stripeLink = (p.stripe_link || '').trim();
     const buyDisabled = !stripeLink || isSold;
     const buyHref  = stripeLink || '#';
@@ -627,7 +606,7 @@
 
     modalInner.innerHTML = `
       ${images}
-      <div class="modal-meta" style="border-top:none;padding-top:0;margin-top:0;">
+      <div class="modal-meta">
         <div class="modal-status ${status}">${statusLabel}</div>
         <h2 class="modal-title">${titleLine}</h2>
         <div class="modal-price">${priceLine}</div>
