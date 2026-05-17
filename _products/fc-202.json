@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-202.webp"
+    "shop-images/frame-202.webp",
+    "shop-images/red-coup-secondary.webp"
   ],
   "stripe_link": ""
 }
