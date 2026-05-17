@@ -1,12 +1,12 @@
 {
   "id": "fc-209",
   "title": "peace out",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-209.webp",
     "shop-images/peace-out-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_6oU7sM5Ya1LUby0d2Zfw40g"
 }

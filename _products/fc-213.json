@@ -1,12 +1,12 @@
 {
   "id": "fc-213",
   "title": "club legend",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-213.webp",
     "shop-images/club-legend-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_cNieVecmy3U2atW4wtfw40k"
 }

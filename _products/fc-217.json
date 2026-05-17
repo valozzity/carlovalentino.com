@@ -1,12 +1,12 @@
 {
   "id": "fc-217",
   "title": "pip squeak",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-217.webp",
     "shop-images/pip-squeak-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_14AcN6cmyfCKeKcgfbfw40o"
 }

@@ -1,12 +1,12 @@
 {
   "id": "fc-12",
   "title": "squad",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-111.webp",
     "shop-images/squad-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_28E6oIeuGeyGeKc7IFfw405"
 }

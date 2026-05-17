@@ -1,12 +1,12 @@
 {
   "id": "fc-208",
   "title": "martini time",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-208.webp",
     "shop-images/martini-time-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_dRmfZi4U6fCKcC45Axfw40f"
 }

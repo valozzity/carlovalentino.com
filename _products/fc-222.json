@@ -1,12 +1,12 @@
 {
   "id": "fc-222",
   "title": "trio",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-222.webp",
     "shop-images/trio-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_3cI6oIfyK8ai7hKgfbfw40t"
 }

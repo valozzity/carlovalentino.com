@@ -1,12 +1,12 @@
 {
   "id": "fc-223",
   "title": "abott",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-223.webp",
     "shop-images/abott-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_fZueVe9amduCatWe73fw40u"
 }

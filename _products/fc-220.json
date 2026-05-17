@@ -1,12 +1,12 @@
 {
   "id": "fc-220",
   "title": "sir ssense",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-220.webp",
     "shop-images/sir-ssense-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_5kQdRa4U60HQatWbYVfw40r"
 }

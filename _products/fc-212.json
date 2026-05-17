@@ -1,12 +1,12 @@
 {
   "id": "fc-212",
   "title": "angels and demons",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-212.webp",
     "shop-images/angels-and-demons-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_9B614ogCO1LU6dG0gdfw40j"
 }

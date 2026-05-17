@@ -1,12 +1,12 @@
 {
   "id": "fc-204",
   "title": "yogi squat",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-204.webp",
     "shop-images/yogi-squat-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_4gM7sMeuGcqy9pS2olfw40b"
 }

@@ -1,12 +1,12 @@
 {
   "id": "fc-216",
   "title": "mama mia",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-216.webp",
     "shop-images/mama-mia-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_cNi4gA5Ya62a1Xqe73fw40n"
 }

@@ -1,12 +1,12 @@
 {
   "id": "fc-201",
   "title": "jaguar 1",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-201.webp",
     "shop-images/jaguar-1-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_bJe28seuG4Y6fOg1khfw408"
 }

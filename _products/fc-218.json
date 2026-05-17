@@ -1,12 +1,12 @@
 {
   "id": "fc-218",
   "title": "right hook",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-218.webp",
     "shop-images/right-hook-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_00w3cw86i4Y659C3spfw40p"
 }

@@ -1,12 +1,12 @@
 {
   "id": "fc-8",
   "title": "you make me thorny",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-108.webp",
     "shop-images/you-make-me-thorny-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_28EdRa86i2PY1Xq7IFfw40B"
 }

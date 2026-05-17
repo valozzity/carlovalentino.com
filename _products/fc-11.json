@@ -1,7 +1,7 @@
 {
   "id": "fc-11",
   "title": "golden tempo",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
@@ -10,5 +10,5 @@
     "shop-images/golden-tempo-secondary.webp",
     "shop-images/golden-tempo-secondary-1.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_5kQ3cwgCOfCKeKc3spfw404"
 }

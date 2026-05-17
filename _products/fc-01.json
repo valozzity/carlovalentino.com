@@ -1,12 +1,12 @@
 {
   "id": "fc-01",
   "title": "beer die",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-01.webp",
     "shop-images/beer-die-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_14A00k1HU62afOg9QNfw402"
 }

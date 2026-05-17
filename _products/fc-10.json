@@ -1,12 +1,12 @@
 {
   "id": "fc-10",
   "title": "ozzy",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-101.webp",
     "shop-images/ozzy-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_4gM7sM9am62a31u2olfw403"
 }

@@ -1,12 +1,12 @@
 {
   "id": "fc-207",
   "title": "lance",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-207.webp",
     "shop-images/lance-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_3cI28sfyKgGOby01khfw40e"
 }

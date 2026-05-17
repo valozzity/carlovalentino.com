@@ -1,12 +1,12 @@
 {
   "id": "fc-214",
   "title": "free bird",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-214.webp",
     "shop-images/free-bird-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_00w7sM72e3U259C2olfw40l"
 }

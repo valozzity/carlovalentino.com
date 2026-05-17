@@ -1,12 +1,12 @@
 {
   "id": "fc-202",
   "title": "red coup",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-202.webp",
     "shop-images/red-coup-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_4gM7sM86ifCKgSkd2Zfw409"
 }

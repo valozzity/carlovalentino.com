@@ -1,12 +1,12 @@
 {
   "id": "fc-210",
   "title": "scorpio",
-  "price": null,
+  "price": 100,
   "description": "",
   "status": "available",
   "images": [
     "shop-images/frame-210.webp",
     "shop-images/scorpio-secondary.webp"
   ],
-  "stripe_link": ""
+  "stripe_link": "https://buy.stripe.com/test_eVqbJ272e2PY8lO9QNfw40h"
 }
