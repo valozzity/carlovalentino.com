@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-209.webp"
+    "shop-images/frame-209.webp",
+    "shop-images/peace-out-secondary.webp"
   ],
   "stripe_link": ""
 }
