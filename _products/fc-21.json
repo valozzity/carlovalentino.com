@@ -5,8 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
+    "shop-images/behold-a-horse-die.png",
     "shop-images/frame-21.webp",
-    "shop-images/behold-a-horse-secondary.webp",
     "shop-images/behold-a-horse-secondary-1.webp"
   ],
   "stripe_link": ""
