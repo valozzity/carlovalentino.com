@@ -523,7 +523,8 @@
     const titleLine = p.title || `<span class="empty-field">untitled — ${p.id}</span>`;
     const descLine  = p.description || `<span class="empty-field">description coming soon.</span>`;
     const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : status === 'wheatpasted' ? 'Wheatpasted' : 'Available';
-    const images = (p.images || []).map(src =>
+    const modalImgs = (p.images || []).length > 1 ? p.images.slice(1) : p.images;
+    const images = modalImgs.map(src =>
       `<img class="modal-image" src="${src}" alt="${p.title || p.id}">`
     ).join('');
     const stripeLink = (p.stripe_link || '').trim();
