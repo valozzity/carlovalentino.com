@@ -313,12 +313,54 @@
 
     .empty-field { color: var(--muted); font-style: italic; }
 
+    /* Mobile snap feed */
+    .snap-feed {
+      display: none;
+    }
+    .snap-item {
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: start;
+      cursor: pointer;
+    }
+    .snap-item img {
+      max-width: 88vw;
+      max-height: 72vh;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.4));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .snap-item img.visible { opacity: 1; }
+
+    .catalog-count-snap {
+      height: 100vh;
+      height: 100dvh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: start;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
     @media (max-width: 767px) {
+      html { scroll-snap-type: y mandatory; }
       header { padding: 20px 20px; }
-      .canvas { padding-top: 100px; padding-bottom: 80px; }
+      .canvas { display: none; }
+      .catalog-count { display: none; }
+      .snap-feed { display: block; }
+      .catalog-count-snap { display: flex; }
       .hover-label { display: none; }
       body { cursor: auto; }
-      .product, .back-link, .modal-close, .modal-buy { cursor: pointer; }
+      .back-link, .modal-close, .modal-buy { cursor: pointer; }
       .reg { width: 14px; height: 14px; }
       .reg::before { height: 14px; }
       .reg::after  { width: 14px; }
@@ -342,6 +384,8 @@
 </header>
 
 <div class="canvas" id="canvas"></div>
+<div class="snap-feed" id="snapFeed"></div>
+<div class="catalog-count-snap" id="catalogCountSnap"></div>
 
 <div class="catalog-count" id="catalogCount"></div>
 
@@ -558,9 +602,36 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
+  // ── MOBILE SNAP FEED ──
+  function buildSnapFeed(products) {
+    const feed = document.getElementById('snapFeed');
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.2 });
+
+    products.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'snap-item';
+      const img = document.createElement('img');
+      img.src = p.images[0];
+      img.alt = p.title || '';
+      img.loading = 'lazy';
+      item.appendChild(img);
+      item.addEventListener('click', () => openModal(p));
+      feed.appendChild(item);
+      imgObserver.observe(img);
+    });
+
+    document.getElementById('catalogCountSnap').textContent = `# ${products.length} fighters painted`;
+  }
+
   // ── INIT ──
   const PRODUCTS = @@PRODUCTS@@;
-  layoutProducts(PRODUCTS);
+  if (isMobile) {
+    buildSnapFeed(PRODUCTS);
+  } else {
+    layoutProducts(PRODUCTS);
+  }
   document.getElementById('catalogCount').textContent = `# ${PRODUCTS.length} fighters painted`;
 
   let resizeT;
