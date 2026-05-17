@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-219.webp"
+    "shop-images/frame-219.webp",
+    "shop-images/sir-lancelot-secondary.webp"
   ],
   "stripe_link": ""
 }
