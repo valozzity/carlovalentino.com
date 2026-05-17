@@ -1,0 +1,11 @@
+{
+  "id": "fc-2",
+  "title": "preffered mode of transport",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-2.webp"
+  ],
+  "stripe_link": ""
+}
