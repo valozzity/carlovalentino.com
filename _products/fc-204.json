@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-204.webp"
+    "shop-images/frame-204.webp",
+    "shop-images/yogi-squat-secondary.webp"
   ],
   "stripe_link": ""
 }
