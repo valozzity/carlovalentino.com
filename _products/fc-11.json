@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-11.webp"
+    "shop-images/frame-11.webp",
+    "shop-images/golden-tempo-secondary.webp"
   ],
   "stripe_link": ""
 }
