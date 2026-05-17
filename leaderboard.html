@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard — Fight Clubbers</title>
+  <meta name="description" content="Top scores for Fight Clubbers by Carlo Valentino.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=JetBrains+Mono:wght@300;400;500;700&family=Barlow+Condensed:wght@500;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #787878;
+      --green:  #2dc437;
+      --fg:     #ebebeb;
+      --muted:  rgba(235,235,235,0.38);
+      --border: rgba(235,235,235,0.18);
+      --dark:   #1a1a1a;
+    }
+
+    html { height: 100%; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Barlow Condensed', sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg {
+      position: fixed;
+      inset: -10%;
+      width: 120%;
+      height: 120%;
+      background-image: url('bg-desktop.jpg');
+      background-size: cover;
+      background-position: center center;
+      z-index: -2;
+      animation: kenBurns 20s ease-in-out infinite alternate;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.82) 100%);
+      z-index: -1;
+    }
+
+    @keyframes kenBurns {
+      0%   { transform: scale(1)    translate(0, 0); }
+      50%  { transform: scale(1.06) translate(-1.5%, 1%); }
+      100% { transform: scale(1.04) translate(1%, -1%); }
+    }
+
+    @media (max-width: 600px) {
+      .bg { background-image: url('bg-mobile.jpg'); background-position: top center; }
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: .055;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* Cursor */
+    .cursor, .cursor-trail {
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cursor       { z-index: 9999; width: 20px; height: 20px; transition: opacity .15s; }
+    .cursor svg   { width: 100%; height: 100%; }
+    .cursor-trail { z-index: 9998; width: 20px; height: 20px; }
+    .cursor-trail svg { width: 100%; height: 100%; }
+
+    /* Registration marks */
+    .reg { position: fixed; width: 20px; height: 20px; pointer-events: none; z-index: 100; }
+    .reg::before, .reg::after { content: ''; position: absolute; background: var(--green); }
+    .reg::before { width: 1px; height: 20px; left: 50%; }
+    .reg::after  { width: 20px; height: 1px; top: 50%; left: 0; }
+    .reg-tl { top: 20px; left: 20px;  animation: regPulse 4.8s ease-in-out infinite 0s; }
+    .reg-tr { top: 20px; right: 20px; animation: regPulse 4.8s ease-in-out infinite 0.6s; }
+    .reg-bl { bottom: 20px; left: 20px;  animation: regPulse 4.8s ease-in-out infinite 1.2s; }
+    .reg-br { bottom: 20px; right: 20px; animation: regPulse 4.8s ease-in-out infinite 1.8s; }
+    @keyframes regPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.25; transform: scale(0.7); }
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 36px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+
+    .logo-mark {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .3em;
+      color: var(--green);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .logo-mark:hover { opacity: .7; }
+
+    .back-link {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .28em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color .15s;
+      cursor: none;
+    }
+    .back-link:hover { color: var(--fg); }
+
+    /* Main */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 36px 40px;
+      max-width: 860px;
+      width: 100%;
+    }
+
+    .page-label {
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: .92;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--green);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: scaleX 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    /* Table */
+    .lb-wrap {
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+    }
+
+    .lb-header, .lb-row {
+      display: grid;
+      grid-template-columns: 36px 80px 1fr 90px;
+      gap: 0 24px;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .lb-header {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .lb-row {
+      border-bottom: 1px solid rgba(235,235,235,0.07);
+      transition: background .12s;
+    }
+    .lb-row:hover { background: rgba(255,255,255,0.04); }
+
+    .lb-rank {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: .2em;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .lb-row.gold   .lb-rank { color: #f5c542; }
+    .lb-row.silver .lb-rank { color: #c0c0c0; }
+    .lb-row.bronze .lb-rank { color: #cd7f32; }
+
+    .lb-name {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+    .lb-row.gold .lb-name { color: #f5c542; }
+
+    .lb-char {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .22em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .lb-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(14px, 1.6vw, 18px);
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: var(--green);
+      text-align: right;
+    }
+
+    .lb-empty {
+      padding: 32px 0;
+      font-size: 11px;
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .lb-status {
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lb-status .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green); }
+      50%       { opacity: 0.4; box-shadow: 0 0 2px var(--green); }
+    }
+
+    /* CTA */
+    .cta-row {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      max-width: 420px;
+      margin-top: 36px;
+      border: 2px solid var(--green);
+      opacity: 0;
+      animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.65s forwards;
+    }
+    .cta-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 750;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: transparent;
+      padding: 14px 20px;
+      text-decoration: none;
+      cursor: none;
+      transition: background .15s, color .15s;
+    }
+    .cta-btn + .cta-btn { border-left: 2px solid var(--green); }
+    .cta-btn:hover, .cta-btn:active { background: var(--green); color: #000; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleX {
+      from { opacity: 0; transform: scaleX(0); }
+      to   { opacity: 1; transform: scaleX(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header, main { padding-left: 20px; padding-right: 20px; }
+      header { padding-top: 20px; }
+      main { padding-bottom: 32px; }
+      .lb-header, .lb-row {
+        grid-template-columns: 28px 60px 1fr 72px;
+        gap: 0 12px;
+      }
+      .cta-row { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="bg-overlay"></div>
+
+<div class="reg reg-tl"></div>
+<div class="reg reg-tr"></div>
+<div class="reg reg-bl"></div>
+<div class="reg reg-br"></div>
+
+<div class="cursor" id="cursor"></div>
+
+<header>
+  <a href="/" class="logo-mark">Carlo Valentino</a>
+  <a href="/" class="back-link">← Back</a>
+</header>
+
+<main>
+  <p class="page-label">Fight Clubbers / 2026</p>
+  <h1>Leader<br>board</h1>
+  <div class="rule"></div>
+
+  <div class="lb-wrap">
+    <div class="lb-header">
+      <span>#</span>
+      <span>Name</span>
+      <span>Character</span>
+      <span style="text-align:right">Time</span>
+    </div>
+    <div id="lb-body">
+      <p class="lb-empty">Loading scores…</p>
+    </div>
+    <div class="lb-status">
+      <span class="dot"></span>
+      <span id="lb-updated">Fetching leaderboard</span>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://fightclubbers.netlify.app/" class="cta-btn" target="_blank" rel="noopener noreferrer">&#9654; Play Now</a>
+    <a href="#" class="cta-btn" id="refresh-btn">↺ Refresh</a>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://ouexdzrfryqflixxzrdg.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_SWwYub6SKEuya_8vBApF3Q_E079w3ik';
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const CHAR_NAMES = {
+    dragon:       'Dragon',
+    knight:       'Knight',
+    silver_knight:'Silver Knight',
+    devil:        'Devil',
+    gundam:       'Gundam',
+    kitty:        'Kitty',
+  };
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  async function loadLeaderboard() {
+    document.getElementById('lb-updated').textContent = 'Fetching leaderboard…';
+    const { data, error } = await db
+      .from('scores')
+      .select('name, character, time_seconds')
+      .order('time_seconds', { ascending: true })
+      .limit(10);
+
+    const body = document.getElementById('lb-body');
+
+    if (error || !data || data.length === 0) {
+      body.innerHTML = '<p class="lb-empty">No scores yet — be the first to clear all 4 stages.</p>';
+      document.getElementById('lb-updated').textContent = error ? 'Error loading scores' : 'No scores yet';
+      return;
+    }
+
+    const medalClass = ['gold', 'silver', 'bronze'];
+    body.innerHTML = data.map((row, i) => `
+      <div class="lb-row ${medalClass[i] || ''}">
+        <span class="lb-rank">${String(i + 1).padStart(2, '0')}</span>
+        <span class="lb-name">${row.name.toUpperCase().slice(0, 3)}</span>
+        <span class="lb-char">${CHAR_NAMES[row.character] || row.character}</span>
+        <span class="lb-time">${formatTime(row.time_seconds)}</span>
+      </div>
+    `).join('');
+
+    const now = new Date();
+    document.getElementById('lb-updated').textContent =
+      `Updated ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  }
+
+  document.getElementById('refresh-btn').addEventListener('click', e => {
+    e.preventDefault();
+    loadLeaderboard();
+  });
+
+  loadLeaderboard();
+
+  // ── Cursor (matches index.html) ──────────────────────────────
+  const EMBLEMS = [
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="0" x2="10" y2="20" stroke="#2dc437" stroke-width="1"/><line x1="0" y1="10" x2="20" y2="10" stroke="#2dc437" stroke-width="1"/></svg>`,
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#2dc437" stroke-width="1"/><circle cx="10" cy="10" r="1.5" fill="#2dc437"/></svg>`,
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="10,1 19,10 10,19 1,10" stroke="#2dc437" stroke-width="1"/></svg>`,
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="2" y1="2" x2="18" y2="18" stroke="#2dc437" stroke-width="1"/><line x1="18" y1="2" x2="2" y2="18" stroke="#2dc437" stroke-width="1"/></svg>`,
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="1" x2="10" y2="19" stroke="#2dc437" stroke-width="1"/><line x1="1" y1="10" x2="19" y2="10" stroke="#2dc437" stroke-width="1"/><line x1="3" y1="3" x2="17" y2="17" stroke="#2dc437" stroke-width="1"/><line x1="17" y1="3" x2="3" y2="17" stroke="#2dc437" stroke-width="1"/></svg>`,
+    `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="8" stroke="#2dc437" stroke-width="1"/><circle cx="10" cy="10" r="4" stroke="#2dc437" stroke-width="1"/><circle cx="10" cy="10" r="1.5" fill="#2dc437"/></svg>`,
+  ];
+
+  let emblemIndex = 0;
+  const cursor = document.getElementById('cursor');
+  cursor.innerHTML = EMBLEMS[0];
+
+  function cycleCursor() {
+    cursor.style.opacity = '0';
+    setTimeout(() => {
+      emblemIndex = (emblemIndex + 1) % EMBLEMS.length;
+      cursor.innerHTML = EMBLEMS[emblemIndex];
+      trails.forEach(t => t.innerHTML = EMBLEMS[emblemIndex]);
+      cursor.style.opacity = '1';
+    }, 150);
+  }
+  setInterval(cycleCursor, 2000);
+
+  const TRAIL_COUNT = 10;
+  const trails = [];
+  const history = Array(TRAIL_COUNT).fill({ x: -100, y: -100 });
+  let mouseX = -100, mouseY = -100;
+
+  for (let i = 0; i < TRAIL_COUNT; i++) {
+    const t = document.createElement('div');
+    t.className = 'cursor-trail';
+    t.innerHTML = EMBLEMS[0];
+    document.body.appendChild(t);
+    trails.push(t);
+  }
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+  });
+
+  (function animateTrail() {
+    history.unshift({ x: mouseX, y: mouseY });
+    history.pop();
+    trails.forEach((t, i) => {
+      const p = history[i];
+      const ratio = (TRAIL_COUNT - i) / TRAIL_COUNT;
+      t.style.left      = p.x + 'px';
+      t.style.top       = p.y + 'px';
+      t.style.opacity   = ratio * 0.45;
+      t.style.transform = `translate(-50%,-50%) scale(${ratio})`;
+    });
+    requestAnimationFrame(animateTrail);
+  })();
+</script>
+
+</body>
+</html>
