@@ -1,0 +1,11 @@
+{
+  "id": "fc-204",
+  "title": "yogi squat",
+  "price": null,
+  "description": "",
+  "status": "available",
+  "images": [
+    "shop-images/frame-204.webp"
+  ],
+  "stripe_link": ""
+}
