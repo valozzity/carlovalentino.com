@@ -5,7 +5,8 @@
   "description": "",
   "status": "available",
   "images": [
-    "shop-images/frame-205.webp"
+    "shop-images/frame-205.webp",
+    "shop-images/flame-on-secondary.webp"
   ],
   "stripe_link": ""
 }
